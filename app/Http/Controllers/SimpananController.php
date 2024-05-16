@@ -144,7 +144,7 @@ class SimpananController extends Controller
     public function show(Request $request, string $id)
     {
         $simpanan = simpanan::where('id_simpanan', '=', $id)->with('anggota')->first();
-        $detail_simpanan = DetailSimpanan::where('id_simpanan', $id)->with(['simpanan'])->get();
+        $detail_simpanan = DetailSimpanan::where('id_simpanan', $id)->with(['simpanan'])->orderBy('created_at', 'desc')->get();
         $setor = DetailSimpanan::where('id_simpanan', $id)
             ->where('jenis_transaksi', '=', 'Setor')
             ->get();
@@ -409,26 +409,15 @@ class SimpananController extends Controller
                     $detail_simpanan->subtotal_saldo = $saldoSebelumSetoran;
 
                     if ($jenisSimpanan == 'Simpanan Wajib') {
-                        if ($request->jenis_anggota == 'Pendiri') {
-                            if ($request->nominal == 50000) {
+                        $simpanan_wajib_sebelum = DetailSimpanan::where('id_simpanan', '=', $data->id_simpanan)->sum('simpanan_wajib');
+                        if ($simpanan_wajib_sebelum > 0) {
+                            if ($request->nominal == $simpanan_wajib_sebelum) {
                                 $detail_simpanan->simpanan_wajib = $request->nominal;
-                            } elseif ($request->nominal > 50000) {
-                                $sisaSaldo = $request->nominal - 50000;
-                                $detail_simpanan->simpanan_wajib = 50000;
-                                $detail_simpanan->simpanan_sukarela = $sisaSaldo;
                             } else {
-                                throw new \Exception('Simpanan wajib anggota pendiri harus Rp. 50.000.');
+                                throw new \Exception('Simpanan Wajib harus senilai dengan setoran sebelumnya yaitu Rp ' . number_format($simpanan_wajib_sebelum, 2, ',', '.'));
                             }
                         } else {
-                            if ($request->nominal == 20000) {
-                                $detail_simpanan->simpanan_wajib = $request->nominal;
-                            } elseif ($request->nominal > 20000) {
-                                $sisaSaldo = $request->nominal - 20000;
-                                $detail_simpanan->simpanan_wajib = 20000;
-                                $detail_simpanan->simpanan_sukarela = $sisaSaldo;
-                            } else {
-                                throw new \Exception('Simpanan wajib anggota biasa harus Rp. 20.000.');
-                            }
+                            $detail_simpanan->simpanan_wajib = $request->nominal;
                         }
                     } else {
                         $detail_simpanan->simpanan_sukarela = $request->nominal;
@@ -480,21 +469,47 @@ class SimpananController extends Controller
     public function destroyDetail(string $id)
     {
         $detail = DetailSimpanan::where('id', $id)->first();
-        $subtotal = $detail->subtotal_saldo;
-
+        $jenis_transaksi = $detail->jenis_transaksi;
+        
         if ($detail) {
             $simpanan = simpanan::where('id_simpanan', $detail->id_simpanan)->first();
-            $dataDetailSimpanan = DetailSimpanan::where('id_simpanan', $detail->id_simpanan)->where('created_at', '>=', $detail->created_at)->get();
+            $dataDetailSimpananSebelum = DetailSimpanan::where('id_simpanan', $detail->id_simpanan)->where('created_at', '<', $detail->created_at)->orderBy('created_at', 'desc')->first();
+            $saldoSebelum = $dataDetailSimpananSebelum->subtotal_saldo;
 
-            foreach ($dataDetailSimpanan as $detailSimpanan) {
-                $detailSimpanan->subtotal_saldo -= $subtotal;
-                $saved = $detailSimpanan->save();
-                if (!$saved) {
-                    return back()->with('error', 'Gagal menyimpan perubahan pada DetailSimpanan.');
+            $dataDetailSimpananSetelah = DetailSimpanan::where('id_simpanan', $detail->id_simpanan)->where('created_at', '>', $detail->created_at)->first();
+            if (!$dataDetailSimpananSetelah) {
+                $transaksiSetelah = null;
+                $jenisTransaksiSetelah = null;
+            } else {
+                if ($dataDetailSimpananSetelah->simpanan_wajib != null) {
+                    $transaksiSetelah = $dataDetailSimpananSetelah->simpanan_wajib;
+                    $jenisTransaksiSetelah = $dataDetailSimpananSetelah->jenis_transaksi;
+                } else {
+                    $transaksiSetelah = $dataDetailSimpananSetelah->simpanan_sukarela;
+                    $jenisTransaksiSetelah = $dataDetailSimpananSetelah->jenis_transaksi;
                 }
-                $dataupdate[] = $detailSimpanan;
             }
+            
+            if ($jenis_transaksi == 'Setor') {
+                
+            } else {
+             
+            }
+            
+            
+            dd($saldoSebelum, $jenisTransaksiSetelah);
+            dd($transaksiSetelah, $jenisTransaksiSetelah);
+
+            // foreach ($dataDetailSimpanan as $detailSimpanan) {
+            //     $detailSimpanan->subtotal_saldo -= $subtotal;
+            //     $saved = $detailSimpanan->save();
+            //     if (!$saved) {
+            //         return back()->with('error', 'Gagal menyimpan perubahan pada DetailSimpanan.');
+            //     }
+            //     $dataupdate[] = $detailSimpanan;
+            // }
             $detail->delete();
+
             $dataSubtotal = DetailSimpanan::orderBy('created_at', 'desc')
                 ->first();
             if ($dataSubtotal) {

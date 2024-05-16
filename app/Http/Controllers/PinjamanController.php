@@ -271,7 +271,10 @@ class PinjamanController extends Controller
 
             $pinjaman = Pinjaman::findOrFail($id);
             $sisaAngsuran = $pinjaman->detail_pinjaman()->where('status_pelunasan', 'Belum Lunas')->count();
-
+            if ($sisaAngsuran == 0) {
+                $pinjaman->status_pinjaman = 'Lunas';
+                $pinjaman->save();
+            }
             return back()->with(['success' => 'Pelunasan berhasil. Sisa angsuran yang belum dilunasi kurang ' . $sisaAngsuran . 'X']);
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
