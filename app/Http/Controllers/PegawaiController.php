@@ -23,7 +23,7 @@ class PegawaiController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::where('id_role', '=', '3')->with('role')->get();
+        $users = User::where('id_role', '!=', 1)->with('role')->get();
 
         if ($request->ajax()) {
             return DataTables::of($users)

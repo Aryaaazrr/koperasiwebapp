@@ -58,7 +58,7 @@
                             <th class="text-center w-8">Angsuran Ke-</th>
                             <th class="text-center">Tanggal Jatuh Tempo</th>
                             <th class="text-center">Angsuran Pokok</th>
-                            <th class="text-center">Bunga 1%</th>
+                            <th class="text-center">Bunga</th>
                             <th class="text-center">Status</th>
                         </tr>
                     </thead>

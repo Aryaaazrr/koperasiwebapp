@@ -7,7 +7,7 @@
                         href="">{{ Auth::user()->role->nama_role }}</a></li>
                 <li class="breadcrumb-item text-sm text-white active" aria-current="page">@yield('title')</li>
             </ol>
-            <h6 class="font-weight-bolder text-white mb-0">@yield('subtitle')</h6>
+            <h6 class="font-weight-bolder fs-5 text-white mb-0">@yield('subtitle')</h6>
         </nav>
 
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">

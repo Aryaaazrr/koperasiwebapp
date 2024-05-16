@@ -57,7 +57,8 @@ class PinjamanController extends Controller
         $validator = Validator::make($request->all(), [
             'id_anggota' => 'required|exists:anggota,id_anggota',
             'angsuran' => 'required|max:12|min:1',
-            'nominal_pinjaman' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/|max:5000000'
+            'nominal_pinjaman' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/|max:5000000',
+            'bunga_pinjaman' => 'required|max:100|min:1'
         ]);
 
         if ($validator->fails()) {
@@ -76,7 +77,7 @@ class PinjamanController extends Controller
         try {
             DB::transaction(function () use ($request) {
                 $angsuran_pokok = ceil($request->nominal_pinjaman / $request->angsuran);
-                $bunga = ceil($request->nominal_pinjaman * 0.01);
+                $bunga = ceil($request->nominal_pinjaman * $request->bunga_pinjaman / 100);
                 $subtotal_angsuran = ceil($angsuran_pokok + $bunga);
                 $sisa_lancar_angsuran = ceil($subtotal_angsuran * $request->angsuran);
                 $pendapatan = $this->hitungKas();
@@ -217,13 +218,13 @@ class PinjamanController extends Controller
                 }
 
                 $angsuranDibayar = $request->input('angsuran');
-                $totalAngsuran = $pinjaman->detail_pinjaman()->where('status_pelunasan', 'Belum Lunas')->count();
+                $totalAngsuran = $pinjaman->detail_pinjaman()->where('status_pelunasan', '!=', 'Lunas')->count();
 
                 if ($angsuranDibayar > $totalAngsuran) {
                     throw new \Exception('Jumlah angsuran yang akan dibayar melebihi jumlah angsuran yang belum dilunasi');
                 }
 
-                $detailPinjaman = $pinjaman->detail_pinjaman()->where('status_pelunasan', 'Belum Lunas')->orderBy('angsuran_ke_')->get();
+                $detailPinjaman = $pinjaman->detail_pinjaman()->where('status_pelunasan', '!=', 'Lunas')->orderBy('angsuran_ke_')->get();
 
                 foreach ($detailPinjaman as $index => $detail) {
                     if ($index < $angsuranDibayar) {

@@ -134,6 +134,15 @@
                                     '" name="nominal_pinjaman" placeholder="Masukkan Nominal" required>' +
                                     '</div>' +
                                     '</div>' +
+                                    '<div class="mb-3 row">' +
+                                    '<label for="bunga' + data.id_anggota +
+                                    '" class="col-sm-2 col-form-label">Bunga Pinjaman</label>' +
+                                    '<div class="col-sm-12">' +
+                                    '<input type="number" class="form-control" id="bunga' +
+                                    data.id_anggota +
+                                    '" name="bunga_pinjaman" max="100" min="1" placeholder="Masukkan Bunga Pinjaman" required>' +
+                                    '</div>' +
+                                    '</div>' +
                                     '</form>' +
                                     '</div>' +
                                     '<div class="modal-footer">' +
