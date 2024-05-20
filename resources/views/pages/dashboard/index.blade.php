@@ -209,34 +209,44 @@
                         @else
                             <div class="col-md-6 mb-lg-0 my-4">
                                 <div class="card border border-0 z-index-2 p-4 h-100">
-                                    <form method="GET" action="{{ route('kepala.line.chart') }}"
-                                        class="d-flex justify-content-end mb-2">
-                                        <select name="tahun" id="tahun" class="form-select cursor-pointer">
-                                            <option value="" selected disabled>Filter Tahun</option>
-                                            @foreach ($shuTahun as $year)
-                                                <option value="{{ $year }}"
-                                                    {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        <button type="submit" class="btn btn-secondary h-100">Filter</button>
+                                    @if (Auth::user()->id_role == 2)
+                                        <form method="GET" action="{{ route('kepala.line.chart') }}"
+                                            class="d-flex justify-content-end mb-2">
+                                        @else
+                                            <form method="GET" action="{{ route('pegawai.line.chart') }}"
+                                                class="d-flex justify-content-end mb-2">
+                                    @endif
+                                    <select name="tahun" id="tahun" class="form-select cursor-pointer">
+                                        <option value="" selected disabled>Filter Tahun</option>
+                                        @foreach ($shuTahun as $year)
+                                            <option value="{{ $year }}"
+                                                {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <button type="submit" class="btn btn-secondary h-100">Filter</button>
                                     </form>
                                     {!! $shuChart->container() !!}
                                 </div>
                             </div>
                             <div class="col-md-6 mb-lg-0 my-4">
                                 <div class="card border border-0 z-index-2 p-4 h-100">
-                                    <form method="GET" action="{{ route('kepala.pie.chart') }}"
-                                        class="d-flex justify-content-end mb-2">
-                                        <select name="tahun" id="tahun" class="form-select cursor-pointer">
-                                            <option value="" selected disabled>Filter Tahun</option>
-                                            @foreach ($transaksiTahun as $year)
-                                                <option value="{{ $year }}"
-                                                    {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        <button type="submit" class="btn btn-secondary h-100">Filter</button>
+                                    @if (Auth::user()->id_role == 2)
+                                        <form method="GET" action="{{ route('kepala.pie.chart') }}"
+                                            class="d-flex justify-content-end mb-2">
+                                        @else
+                                            <form method="GET" action="{{ route('pegawai.pie.chart') }}"
+                                                class="d-flex justify-content-end mb-2">
+                                    @endif
+                                    <select name="tahun" id="tahun" class="form-select cursor-pointer">
+                                        <option value="" selected disabled>Filter Tahun</option>
+                                        @foreach ($transaksiTahun as $year)
+                                            <option value="{{ $year }}"
+                                                {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <button type="submit" class="btn btn-secondary h-100">Filter</button>
                                     </form>
                                     {!! $transaksiChart->container() !!}
                                 </div>
