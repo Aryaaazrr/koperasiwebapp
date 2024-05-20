@@ -15,12 +15,11 @@ return new class extends Migration
             $table->id('id_users');
             $table->string('nik')->unique();
             $table->string('nama');
-            $table->string('email')->unique();
+            $table->string('username');
             $table->string('password');
             $table->string('no_telp')->nullable();
             $table->string('alamat')->nullable();
             $table->enum('jenis_kelamin', ['Laki-Laki', 'Perempuan'])->nullable();
-            $table->rememberToken();
             $table->timestamps();
         });
     }

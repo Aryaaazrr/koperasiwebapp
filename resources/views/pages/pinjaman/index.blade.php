@@ -119,19 +119,27 @@
                             {
                                 data: null,
                                 render: function(data) {
-                                    return '<div class="row justify-content-center">' +
+                                    var result = '<div class="row justify-content-center">' +
                                         '<div class="col-auto">' +
                                         '<a href="{{ route('pinjaman.show', '') }}/' + data.id_pinjaman +
                                         '" style="font-size: 10pt" class="btn btn-secondary m-1 edit-btn" ' +
-                                        'data-id="' + data.id +
-                                        '">Lihat</a>' +
-                                        '<a href="{{ route('pinjaman.destroy', '') }}/' + data.id_pinjaman +
-                                        '" style="font-size: 10pt" class="btn btn-danger m-1 delete-btn" ' +
                                         'data-id="' + data.id_pinjaman +
-                                        '">Hapus</a>' +
-                                        '</div>' +
+                                        '">Lihat</a>';
+
+                                    if (data.status_pinjaman == 'Belum Lunas') {
+                                        result += '<a href="{{ route('pinjaman.destroy', '') }}/' + data
+                                            .id_pinjaman +
+                                            '" style="font-size: 10pt" class="btn btn-danger m-1 delete-btn" ' +
+                                            'data-id="' + data.id_pinjaman +
+                                            '">Hapus</a>';
+                                    }
+
+                                    result += '</div>' +
                                         '</div>';
+
+                                    return result;
                                 }
+
                             }
                         ],
                         rowCallback: function(row, data, index) {

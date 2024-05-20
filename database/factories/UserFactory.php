@@ -31,7 +31,7 @@ class UserFactory extends Factory
         return [
             'nama' => $faker->name(),
             'nik' => $nik,
-            'email' => $faker->unique()->safeEmail(),
+            'username' => $faker->userName(),
             'password' => static::$password ??= Hash::make('password'),
             'id_role' => 3,
         ];

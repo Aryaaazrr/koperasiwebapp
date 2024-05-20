@@ -27,8 +27,8 @@
                                     {{-- <form role="form" action="{{ route('login_proses') }}" method="POST"> --}}
                                     @csrf
                                     <div class="mb-3">
-                                        <input type="email" name="email" class="form-control form-control-lg"
-                                            placeholder="email" aria-label="Email" value="{{ old('email') }}">
+                                        <input type="text" name="username" class="form-control form-control-lg"
+                                            placeholder="Username" aria-label="Username" value="{{ old('username') }}">
                                     </div>
                                     {{-- @error('email') --}}
                                     {{-- <small>{{ $message }}</small> --}}

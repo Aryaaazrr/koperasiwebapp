@@ -15,10 +15,10 @@ class AnggotaChart
         $this->chart = $chart;
     }
 
-    public function build(): LineChart
+    public function build($tahun = null): LineChart
     {
-        $tahun = date('Y');
-        $bulan = date('m');
+        $tahun = $tahun ?: date('Y');
+        $bulan = 12;
 
         $dataAnggota = [];
         $dataBulan = [];
@@ -33,7 +33,7 @@ class AnggotaChart
         }
 
         $totalAnggotaBulanIni = array_sum($dataAnggota);
-        $subtitle = 'Total Anggota Baru Bulan Ini: ' . $totalAnggotaBulanIni;
+        $subtitle = 'Total Anggota Baru Tahun ' . $tahun . ': ' . $totalAnggotaBulanIni;
 
         $this->chart->setTitle('Pertumbuhan Anggota')
             ->setSubtitle($subtitle)

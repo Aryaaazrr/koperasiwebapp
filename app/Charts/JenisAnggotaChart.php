@@ -4,6 +4,7 @@ namespace App\Charts;
 
 use App\Models\Anggota;
 use ArielMejiaDev\LarapexCharts\PieChart;
+use Illuminate\Support\Facades\DB;
 
 class JenisAnggotaChart
 {
@@ -14,25 +15,27 @@ class JenisAnggotaChart
         $this->chart = $chart;
     }
 
-    public function build(): PieChart
+    public function build($tahun = null): PieChart
     {
-        $tahun = date('Y');
-        $bulan = date('m');
+        $tahun = $tahun ?: date('Y');
+
+        $data = Anggota::select('jenis_kelamin', DB::raw('count(*) as total'))
+            ->whereYear('tanggal_masuk', $tahun)
+            ->groupBy('jenis_kelamin')
+            ->pluck('total', 'jenis_kelamin')->toArray();
 
         $anggotaPendiri = Anggota::where('jenis_anggota', 'Pendiri')
             ->whereYear('tanggal_masuk', $tahun)
-            ->whereMonth('tanggal_masuk', $bulan)
             ->count();
         $anggotaBiasa = Anggota::where('jenis_anggota', 'Biasa')
             ->whereYear('tanggal_masuk', $tahun)
-            ->whereMonth('tanggal_masuk', $bulan)
             ->count();
 
-        $this->chart->setTitle('Jenis Anggota Koperasi')
-            ->setSubtitle('Total Anggota Pendiri = ' . $anggotaPendiri . ', ' . 'Total Anggota Biasa =' . $anggotaBiasa)
-            ->addData([$anggotaPendiri, $anggotaBiasa])
-            ->setLabels(['Anggota Pendiri', 'Anggota Biasa'])
-            ->setColors(['#36A2EB', '#FF6384']);
+        $this->chart->setTitle('Distribusi Jenis Anggota')
+            ->setSubtitle('Total Anggota Pendiri = ' . $anggotaPendiri . ', ' . 'Total Anggota Biasa = ' . $anggotaBiasa)
+            ->addData(array_values($data))
+            ->setLabels(array_keys($data));
+
         return $this->chart;
     }
 }

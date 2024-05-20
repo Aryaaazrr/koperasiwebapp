@@ -41,9 +41,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Email</label>
-                                        <input class="form-control" type="email" name="email"
-                                            value="{{ Auth::user()->email }}">
+                                        <label for="example-text-input" class="form-control-label">Username</label>
+                                        <input class="form-control" type="text" name="username"
+                                            value="{{ Auth::user()->username }}">
                                     </div>
                                 </div>
                             </div>

@@ -10,6 +10,7 @@ use App\Models\Anggota;
 use App\Models\DetailPinjaman;
 use App\Models\DetailSimpanan;
 use App\Models\HistoryTransaksi;
+use App\Models\Laporan;
 use App\Models\Pinjaman;
 use App\Models\Simpanan;
 use App\Models\User;
@@ -25,25 +26,63 @@ class DashboardController extends Controller
      */
     public function index(SHUChart $lineChart, TransaksiChart $pieChart, AnggotaChart $lineChartAnggota, JenisAnggotaChart $pieChartJenisAnggota, Request $request)
     {
-        if (Auth::user()->id_role == 1) {
-            $jumlahAnggota = Anggota::count();
-            $jumlahPegawai = User::where('id_role', '=', '3')->count();
-            $jumlahSimpanan = Simpanan::count();
-            $jumlahPinjaman = Pinjaman::count();
-            $anggotaChart = $lineChartAnggota->build();
-            $jenisAnggotaChart = $pieChartJenisAnggota->build();
+        $jumlahAnggota = Anggota::count();
+        $jumlahPegawai = User::where('id_role', '=', '3')->count();
+        $jumlahSimpanan = Simpanan::count();
+        $jumlahPinjaman = Pinjaman::count();
 
-            return view('pages.dashboard.index', compact('jumlahAnggota', 'jumlahPegawai', 'jumlahSimpanan', 'jumlahPinjaman', 'anggotaChart', 'jenisAnggotaChart'));
+        $jumlahAnggotaBulanLalu = Anggota::whereMonth('tanggal_masuk', '=', Carbon::now()->subMonth()->month)->count();
+
+        $pertumbuhanAnggota = 0;
+        if ($jumlahAnggotaBulanLalu > 0) {
+            $pertumbuhanAnggota = (($jumlahAnggota - $jumlahAnggotaBulanLalu) / $jumlahAnggota) * 100;
         } else {
-            $jumlahAnggota = Anggota::count();
-            $jumlahPegawai = User::where('id_role', '=', '3')->count();
-            $jumlahSimpanan = Simpanan::count();
-            $jumlahPinjaman = Pinjaman::count();
+            $pertumbuhanAnggota = 100;
+        }
 
+        $selectedYear = $request->get('tahun');
+
+        if (Auth::user()->id_role == 1) {
+            $anggotaTahun = Anggota::selectRaw('YEAR(tanggal_masuk) as year')
+                ->distinct()
+                ->pluck('year')
+                ->sortDesc()
+                ->toArray();
+
+            $jenisTahun = Anggota::selectRaw('YEAR(tanggal_masuk) as year')
+                ->distinct()
+                ->pluck('year')
+                ->sortDesc()
+                ->toArray();
+
+            if ($selectedYear) {
+                $anggotaData = Anggota::whereYear('tanggal_masuk', $selectedYear)->get();
+                $jenisTahun = Anggota::whereYear('tanggal_masuk', $selectedYear)->get();
+            } else {
+                $anggotaData = Anggota::all();
+                $jenisTahun = Anggota::all();
+            }
+
+            $anggotaChart = $lineChartAnggota->build($selectedYear);
+            $jenisAnggotaChart = $pieChartJenisAnggota->build($selectedYear);
+
+            return view('pages.dashboard.index', compact('jumlahAnggota', 'jumlahPegawai', 'jumlahSimpanan', 'jumlahPinjaman', 'anggotaChart', 'jenisAnggotaChart', 'pertumbuhanAnggota', 'anggotaTahun', 'jenisTahun', 'selectedYear'));
+        } else {
             $setor = DetailSimpanan::where('jenis_transaksi', '=', 'Setor')
                 ->get();
             $tarik = DetailSimpanan::where('jenis_transaksi', '=', 'Tarik')
                 ->get();
+
+            $shuTahun = Laporan::selectRaw('YEAR(created_at) as year')
+                ->distinct()
+                ->pluck('year')
+                ->sortDesc()
+                ->toArray();
+            $transaksiTahun = HistoryTransaksi::selectRaw('YEAR(created_at) as year')
+                ->distinct()
+                ->pluck('year')
+                ->sortDesc()
+                ->toArray();
 
             $totalSimpananPokok = $setor->sum('simpanan_pokok');
             $totalSimpananWajib = $setor->sum('simpanan_wajib');
@@ -59,7 +98,7 @@ class DashboardController extends Controller
 
             $rekap = HistoryTransaksi::with('users', 'anggota', 'detail_simpanan', 'pinjaman', 'detail_pinjaman')->orderBy('created_at', 'desc')->get();
 
-            $shuChart = $lineChart->build();
+            $shuChart = $lineChart->build($selectedYear);
             $transaksiChart = $pieChart->build();
 
             $jumlahMasuk = 0.00;
@@ -152,7 +191,7 @@ class DashboardController extends Controller
                 return DataTables::of($rowData)->toJson();
             }
 
-            return view('pages.dashboard.index', compact('jumlahAnggota', 'jumlahPegawai', 'jumlahSimpanan', 'jumlahPinjaman', 'totalSimpananPokok', 'totalSimpananWajib', 'totalSimpananSukarela', 'pendapatan', 'shuChart', 'transaksiChart'));
+            return view('pages.dashboard.index', compact('jumlahAnggota', 'jumlahPegawai', 'jumlahSimpanan', 'jumlahPinjaman', 'totalSimpananPokok', 'totalSimpananWajib', 'totalSimpananSukarela', 'pendapatan', 'shuChart', 'transaksiChart', 'pertumbuhanAnggota', 'shuTahun', 'transaksiTahun', 'selectedYear'));
         }
     }
 

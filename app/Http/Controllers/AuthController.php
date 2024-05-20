@@ -20,15 +20,14 @@ class AuthController extends Controller
     public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'username' => ['required'],
             'password' => ['required'],
         ], [
-            'email.required' => 'Alamat email harus diisi.',
-            'email.email' => 'Format email tidak valid.',
+            'username.required' => 'Username harus diisi.',
             'password.required' => 'Kata sandi harus diisi.',
         ]);
 
-        $registeredUser = User::where('email', $request->email)->first();
+        $registeredUser = User::where('username', $request->username)->first();
 
         if ($registeredUser) {
 
@@ -43,7 +42,7 @@ class AuthController extends Controller
                     return redirect('dashboard');
                 }
             } else {
-                return back()->withInput()->withErrors('Email dan Password yang dimasukkan tidak sesuai');
+                return back()->withInput()->withErrors('Username dan Password yang dimasukkan tidak sesuai');
             }
         }
         return back()->withInput()->withErrors('Akun tidak ditemukan');

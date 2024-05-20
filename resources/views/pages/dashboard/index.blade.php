@@ -10,73 +10,91 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
 
                     <div class="row">
-                        <div class="col-md-6 col-lg-4 col-xl-3 order-0 mb-4">
-                            <div class="card border border-0">
-                                <div
-                                    class="card-header border border-0 bg-light d-flex align-items-center justify-content-between pb-0">
-                                    <h5 class="-mt-2">Pegawai</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <div class="d-flex flex-column align-items-start gap-1">
-                                            <h2 class="mb-2">{{ $jumlahPegawai }}</h2>
-                                            <span>Jumlah Pegawai</span>
+                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                            <div class="card">
+                                <div class="card-body p-3">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="numbers">
+                                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Pegawai</p>
+                                                <a href="{{ route('pegawai') }}">
+                                                    <h5 class="font-weight-bolder">
+                                                        {{ $jumlahPegawai }}
+                                                    </h5>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div id="orderStatisticsChart"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 order-0 mb-4">
-                            <div class="card border border-0">
-                                <div
-                                    class="card-header border border-0 bg-light d-flex align-items-center justify-content-between pb-0">
-                                    <h5 class="-mt-2">Anggota</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <div class="d-flex flex-column align-items-start gap-1">
-                                            <h2 class="mb-2">{{ $jumlahAnggota }}</h2>
-                                            <span>Jumlah Anggota</span>
+                                        <div class="col-4 text-end">
+                                            <img src="/icon/menuicon/computer-worker.png" class="icon icon-shape icon-sm">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 order-0 mb-4">
-                            <div class="card border border-0">
-                                <div
-                                    class="card-header border border-0 d-flex align-items-center justify-content-between pb-0">
-                                    <h5 class="-mt-2">Simpanan</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <div class="d-flex flex-column align-items-start gap-1">
-                                            <h2 class="mb-2">{{ $jumlahSimpanan }}</h2>
-                                            <span>Jumlah Simpanan</span>
+                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                            <div class="card">
+                                <div class="card-body p-3">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="numbers">
+                                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Anggota</p>
+                                                <a href="{{ route('anggota') }}">
+                                                    <h5 class="font-weight-bolder">
+                                                        {{ $jumlahAnggota }}
+                                                    </h5>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div id="orderStatisticsChart"></div>
+                                        <div class="col-4 text-end">
+                                            <img src="/icon/menuicon/customers.png" class="icon icon-shape icon-sm">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-4 col-xl-3 order-0 mb-4">
-                            <div class="card border border-0">
-                                <div
-                                    class="card-header border border-0 d-flex align-items-center justify-content-between pb-0">
-                                    <h5 class="-mt-2">Pinjaman</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <div class="d-flex flex-column align-items-start gap-1">
-                                            <h2 class="mb-2">{{ $jumlahSimpanan }}</h2>
-                                            <span>Jumlah Pinjaman</span>
+                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                            <div class="card">
+                                <div class="card-body p-3">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="numbers">
+                                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Simpanan</p>
+                                                <a href="{{ route('simpanan') }}">
+                                                    <h5 class="font-weight-bolder">
+                                                        {{ $jumlahSimpanan }}
+                                                    </h5>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div id="orderStatisticsChart"></div>
+                                        <div class="col-4 text-end">
+                                            <img src="/icon/menuicon/reduction.png" class="icon icon-shape icon-sm">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                            <div class="card">
+                                <div class="card-body p-3">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="numbers">
+                                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Pinjaman</p>
+                                                <a href="{{ route('pinjaman') }}">
+                                                    <h5 class="font-weight-bolder">
+                                                        {{ $jumlahPinjaman }}
+                                                    </h5>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <img src="/icon/menuicon/loan.png" class="icon icon-shape icon-sm">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         @if (Auth::user()->id_role != 1)
                             <div class="col-md-6 col-lg-4 col-xl-3 order-0 mb-4">
                                 <div class="card border border-0">
@@ -156,22 +174,70 @@
                         @if (Auth::user()->id_role == 1)
                             <div class="col-md-6 mb-lg-0 my-4">
                                 <div class="card border border-0 z-index-2 p-4 h-100">
+                                    <form method="GET" action="{{ route('admin.line.chart') }}"
+                                        class="d-flex justify-content-end mb-2">
+                                        <select name="tahun" id="tahun" class="form-select cursor-pointer">
+                                            <option value="" selected disabled>Filter Tahun</option>
+                                            @foreach ($anggotaTahun as $year)
+                                                <option value="{{ $year }}"
+                                                    {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <button type="submit" class="btn btn-secondary h-100">Filter</button>
+                                    </form>
                                     {!! $anggotaChart->container() !!}
                                 </div>
                             </div>
                             <div class="col-md-6 mb-lg-0 my-4">
                                 <div class="card border border-0 z-index-2 p-4 h-100">
+                                    <form method="GET" action="{{ route('admin.pie.chart') }}"
+                                        class="d-flex justify-content-end mb-2">
+                                        <select name="tahun" id="tahun" class="form-select cursor-pointer">
+                                            <option value="" selected disabled>Filter Tahun</option>
+                                            @foreach ($jenisTahun as $year)
+                                                <option value="{{ $year }}"
+                                                    {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <button type="submit" class="btn btn-secondary h-100">Filter</button>
+                                    </form>
                                     {!! $jenisAnggotaChart->container() !!}
                                 </div>
                             </div>
                         @else
                             <div class="col-md-6 mb-lg-0 my-4">
                                 <div class="card border border-0 z-index-2 p-4 h-100">
+                                    <form method="GET" action="{{ route('kepala.line.chart') }}"
+                                        class="d-flex justify-content-end mb-2">
+                                        <select name="tahun" id="tahun" class="form-select cursor-pointer">
+                                            <option value="" selected disabled>Filter Tahun</option>
+                                            @foreach ($shuTahun as $year)
+                                                <option value="{{ $year }}"
+                                                    {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <button type="submit" class="btn btn-secondary h-100">Filter</button>
+                                    </form>
                                     {!! $shuChart->container() !!}
                                 </div>
                             </div>
                             <div class="col-md-6 mb-lg-0 my-4">
                                 <div class="card border border-0 z-index-2 p-4 h-100">
+                                    <form method="GET" action="{{ route('kepala.pie.chart') }}"
+                                        class="d-flex justify-content-end mb-2">
+                                        <select name="tahun" id="tahun" class="form-select cursor-pointer">
+                                            <option value="" selected disabled>Filter Tahun</option>
+                                            @foreach ($transaksiTahun as $year)
+                                                <option value="{{ $year }}"
+                                                    {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <button type="submit" class="btn btn-secondary h-100">Filter</button>
+                                    </form>
                                     {!! $transaksiChart->container() !!}
                                 </div>
                             </div>

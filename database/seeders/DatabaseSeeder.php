@@ -33,8 +33,8 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'nama'              => 'Admin',
-            'email'             => 'admin@admin.com',
-            'password'          => Hash::make('admin.com'),
+            'username'             => 'admin',
+            'password'          => Hash::make('admin123'),
             'id_role'           => 1,
         ]);
     }

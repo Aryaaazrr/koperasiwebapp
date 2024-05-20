@@ -41,9 +41,9 @@
             </div>
 
             <div class="col-md-6 mb-3">
-                <label for="email" class="col-md-6 col-form-label">Email</label>
-                <input type="email" class="form-control" id="email" name='email' value="{{ old('email') }}"
-                    placeholder="Masukkan Email" required>
+                <label for="username" class="col-md-6 col-form-label">Username</label>
+                <input type="username" class="form-control" id="username" name='username' value="{{ old('username') }}"
+                    placeholder="Masukkan Username" required>
             </div>
 
             <div class="col-md-6 mb-3">

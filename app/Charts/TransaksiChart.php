@@ -18,9 +18,9 @@ class TransaksiChart
         $this->chart = $chart;
     }
 
-    public function build(): PieChart
+    public function build($tahun = null): PieChart
     {
-        $tahun = date('Y');
+        $tahun = $tahun ?: date('Y');
         $bulan = date('m');
 
         $totalPemasukan = 0.00;
@@ -52,7 +52,7 @@ class TransaksiChart
         }
 
         $this->chart->setTitle('Pemasukan & Pengeluaran')
-            ->setSubtitle('Total Pendapatan Koperasi Sekarang  Rp ' . number_format($totalPemasukan - $totalPengeluaran, 2, ',', '.'))
+            ->setSubtitle('Total Pendapatan Koperasi Sekarang Rp ' . number_format($totalPemasukan - $totalPengeluaran, 2, ',', '.'))
             ->addData([$totalPemasukan, $totalPengeluaran])
             ->setLabels(['Pemasukan', 'Pengeluaran'])
             ->setColors(['#36A2EB', '#FF6384']);

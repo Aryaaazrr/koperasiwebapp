@@ -34,6 +34,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['middleware' => 'admin'], function () {
         Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('admin/dashboard/line-chart-anggota', [DashboardController::class, 'index'])->name('admin.line.chart');
+        Route::get('admin/dashboard/pie-chart-anggota', [DashboardController::class, 'index'])->name('admin.pie.chart');
 
         Route::get('admin/pegawai', [PegawaiController::class, 'index'])->name('admin.pegawai');
         Route::get('admin/pegawai/add', [PegawaiController::class, 'create'])->name('admin.pegawai.create');
@@ -57,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['middleware' => 'kepala'], function () {
         Route::get('kepala/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('kepala/dashboard/line-chart-anggota', [DashboardController::class, 'index'])->name('kepala.line.chart');
+        Route::get('kepala/dashboard/pie-chart-anggota', [DashboardController::class, 'index'])->name('kepala.pie.chart');
 
         Route::get('kepala/pegawai', [PegawaiController::class, 'index'])->name('pegawai');
         Route::get('kepala/pegawai/add', [PegawaiController::class, 'create'])->name('pegawai.create');
@@ -107,6 +111,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['middleware' => 'pegawai'], function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('pegawai.dashboard');
+        Route::get('dashboard/line-chart-anggota', [DashboardController::class, 'index'])->name('pegawai.line.chart');
+        Route::get('dashboard/pie-chart-anggota', [DashboardController::class, 'index'])->name('pegawai.pie.chart');
 
         Route::get('pegawai', [PegawaiController::class, 'index'])->name('pegawai.pegawai');
         Route::get('pegawai/add', [PegawaiController::class, 'create'])->name('pegawai.pegawai.create');

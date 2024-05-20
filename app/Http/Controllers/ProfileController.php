@@ -65,7 +65,7 @@ class ProfileController extends Controller
             $validator = Validator::make($request->all(), [
                 'nik' => 'required|digits:16|unique:users,nik,' . $id . ',id_users',
                 'nama' => 'required',
-                'email' => 'required|email|unique:users,email,' . $id . ',id_users',
+                'username' => 'required|unique:users,username,' . $id . ',id_users',
                 'jeniskelamin' => 'required|in:Laki-Laki,Perempuan',
                 'alamat' => 'required',
                 'no_telp' => 'required|numeric',
@@ -80,7 +80,7 @@ class ProfileController extends Controller
 
             $users->nik = $request->nik;
             $users->nama = $request->nama;
-            $users->email = $request->email;
+            $users->username = $request->username;
             $users->jenis_kelamin = $request->jeniskelamin;
             $users->alamat = $request->alamat;
             $users->no_telp = $request->no_telp;
@@ -88,7 +88,7 @@ class ProfileController extends Controller
             $validator = Validator::make($request->all(), [
                 'nik' => 'required|digits:16|unique:users,nik,' . $id . ',id_users',
                 'nama' => 'required',
-                'email' => 'required|email|unique:users,email,' . $id . ',id_users',
+                'username' => 'required|unique:users,username,' . $id . ',id_users',
                 'jeniskelamin' => 'required|in:Laki-Laki,Perempuan',
                 'alamat' => 'required',
                 'no_telp' => 'required|numeric',
@@ -104,7 +104,7 @@ class ProfileController extends Controller
 
             $users->nik = $request->nik;
             $users->nama = $request->nama;
-            $users->email = $request->email;
+            $users->username = $request->username;
             $users->jenis_kelamin = $request->jeniskelamin;
             $users->alamat = $request->alamat;
             $users->no_telp = $request->no_telp;

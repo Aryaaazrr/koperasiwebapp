@@ -22,7 +22,7 @@ class User extends Authenticatable
     protected $primaryKey = 'id_users';
     protected $fillable = [
         'nama',
-        'email',
+        'username',
         'password',
         'noTelp',
         'alamat',
@@ -35,7 +35,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**
@@ -44,7 +43,6 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
 
@@ -66,7 +64,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(DetailPinjaman::class, 'id_users', 'id_users');
     }
-    
+
     public function history_transaksi()
     {
         return $this->hasMany(HistoryTransaksi::class, 'id_users', 'id_users');

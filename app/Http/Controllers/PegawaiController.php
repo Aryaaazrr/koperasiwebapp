@@ -52,7 +52,7 @@ class PegawaiController extends Controller
         $validator = Validator::make($request->all(), [
             'nik' => 'required|digits:16|unique:users',
             'nama' => 'required',
-            'email' => 'required|unique:users|email',
+            'username' => 'required|unique:users',
             'jeniskelamin' => 'required|in:Laki-Laki,Perempuan',
             'alamat' => 'required',
             'noTelp' => 'required|numeric',
@@ -69,7 +69,7 @@ class PegawaiController extends Controller
         $pegawai = new User();
         $pegawai->nik = $request->nik;
         $pegawai->nama = $request->nama;
-        $pegawai->email = $request->email;
+        $pegawai->username = $request->username;
         $pegawai->password = Hash::make($request->password);
         $pegawai->jenis_kelamin = $request->jeniskelamin;
         $pegawai->alamat = $request->alamat;
@@ -121,7 +121,7 @@ class PegawaiController extends Controller
             $validator = Validator::make($request->all(), [
                 'nik' => 'required|digits:16',
                 'nama' => 'required',
-                'email' => 'required|email|unique:users,email,' . $id . ',id_users',
+                'username' => 'required|unique:users,username,' . $id . ',id_users',
                 'jeniskelamin' => 'required|in:Laki-Laki,Perempuan',
                 'alamat' => 'required',
                 'noTelp' => 'required|numeric',
@@ -137,7 +137,7 @@ class PegawaiController extends Controller
 
             $pegawai->nik = $request->nik;
             $pegawai->nama = $request->nama;
-            $pegawai->email = $request->email;
+            $pegawai->username = $request->username;
             $pegawai->jenis_kelamin = $request->jeniskelamin;
             $pegawai->alamat = $request->alamat;
             $pegawai->no_telp = $request->noTelp;
@@ -146,7 +146,7 @@ class PegawaiController extends Controller
             $validator = Validator::make($request->all(), [
                 'nik' => 'required|digits:16',
                 'nama' => 'required',
-                'email' => 'required|email|unique:users,email,' . $id . ',id_users',
+                'username' => 'required|unique:users,username,' . $id . ',id_users',
                 'jeniskelamin' => 'required|in:Laki-Laki,Perempuan',
                 'alamat' => 'required',
                 'noTelp' => 'required|numeric',
@@ -163,7 +163,7 @@ class PegawaiController extends Controller
 
             $pegawai->nik = $request->nik;
             $pegawai->nama = $request->nama;
-            $pegawai->email = $request->email;
+            $pegawai->username = $request->username;
             $pegawai->jenis_kelamin = $request->jeniskelamin;
             $pegawai->alamat = $request->alamat;
             $pegawai->no_telp = $request->noTelp;
