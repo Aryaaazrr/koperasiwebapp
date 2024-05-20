@@ -10,21 +10,32 @@
                 <div class="col-sm-12">
                     <div class="card-body">
                         <div class="row d-flex justify-content-between">
-                            <div class="col-md-6">
-                                <p>
-                                    Pendapatan : Rp {{ number_format($pendapatan, 2, ',', '.') }}
-                                </p>
-                                <p class="mt-4">
-                                    Pemasukan : Rp {{ number_format($totalPemasukan, 2, ',', '.') }}
-                                </p>
-                                <p class="mt-4">
-                                    Pengeluaran : Rp {{ number_format($totalPengeluaran, 2, ',', '.') }}
-                                </p>
+                            <div class="col-md-12">
+                                <form action="{{ route('rekap.filter') }}" method="GET" class="form-control">
+                                    <span class="d-flex -mb-4">
+                                        <h5>Pilih Rentang Waktu :</h5>
+                                    </span>
+                                    @csrf
+                                    <div class="col d-flex justify-content-start align-items-center">
+                                        <input type="date" name="start_date" class="form-control h-50 me-2 mb-2"
+                                            required>
+                                        <input type="date" name="end_date" class="form-control h-50 me-2 mb-2" required>
+                                        <button type="submit" class="btn btn-primary">Filter</button>
+                                    </div>
+                                    <h4><b>Pendapatan : Rp {{ number_format($pendapatan, 2, ',', '.') }}</b>
+                                    </h4>
+                                    <h4 class="mt-4">
+                                        <b>Pemasukan : Rp {{ number_format($totalPemasukan, 2, ',', '.') }}</b>
+                                    </h4>
+                                    <h4 class="mt-4">
+                                        <b>Pengeluaran : Rp {{ number_format($totalPengeluaran, 2, ',', '.') }}</b>
+                                    </h4>
+                                </form>
                             </div>
-                            <div class="col-md-4">
-                                <div class="pb-2 mt-3">
+                            <div class="col-md-6">
+                                <div class="pb-2">
                                     @if (Auth::user()->id_role == 2)
-                                        <form action="{{ route('rekap.export') }}" method="GET" class="form-control">
+                                        {{-- <form action="{{ route('rekap.export') }}" method="GET" class="form-control">
                                             <span class="d-flex -mb-4">
                                                 <h5>Pilih Rentang Waktu :</h5>
                                             </span>
@@ -36,9 +47,9 @@
                                                     required>
                                                 <button type="submit" class="btn btn-secondary">Cetak</button>
                                             </div>
-                                        </form>
+                                        </form> --}}
                                     @else
-                                        <form action="{{ route('pegawai.rekap.export') }}" method="GET"
+                                        {{-- <form action="{{ route('pegawai.rekap.export') }}" method="GET"
                                             class="form-control">
                                             <span class="d-flex -mb-4">
                                                 <h5>Pilih Rentang Waktu :</h5>
@@ -51,7 +62,7 @@
                                                     required>
                                                 <button type="submit" class="btn btn-secondary">Cetak</button>
                                             </div>
-                                        </form>
+                                        </form> --}}
                                     @endif
                                 </div>
                             </div>
@@ -76,6 +87,50 @@
                     <tbody class="text-center" style="font-size: 10pt">
                     </tbody>
                 </table>
+            </div>
+            <div class="d-flex justify-content-between">
+                <div class="pb-2 mt-4">
+                </div>
+                <div class="pb-2 mt-4">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#basicModal">Cetak
+                        Rekap</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="basicModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    @if (Auth::user()->id_role == 2)
+                        <form action="{{ route('rekap.export') }}" method="GET">
+                        @else
+                            <form action="{{ route('pegawai.rekap.export') }}" method="GET">
+                    @endif
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cetak Rekap Transaksi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-start">
+                        <div class="mb-3 row">
+                            <label for="rentang" class="col-sm-4 col-form-label">Rentang Waktu</label>
+                            <div class="col-md-12 d-flex justify-content-between">
+                                <div class="col-md-6">
+                                    <input type="date" name="start_date" class="form-control me-2 mb-2" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="date" name="end_date" class="form-control  me-2 mb-2" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Cetak</button>
+                    </div>
+                    </form>
+                </div>
             </div>
         </div>
     </main>

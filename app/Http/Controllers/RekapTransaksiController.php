@@ -20,12 +20,20 @@ class RekapTransaksiController extends Controller
      */
     public function index(Request $request)
     {
-        $rekap = HistoryTransaksi::with('users', 'anggota', 'detail_simpanan', 'pinjaman', 'detail_pinjaman')->orderBy('created_at', 'desc')->get();
+        $query = HistoryTransaksi::with('users', 'anggota', 'detail_simpanan', 'pinjaman', 'detail_pinjaman')->orderBy('created_at', 'desc');
 
         $jumlahMasuk = 0.00;
         $jumlahKeluar = 0.00;
         $totalPemasukan = 0.00;
         $totalPengeluaran = 0.00;
+
+        if ($request->has(['start_date', 'end_date'])) {
+            $startDate = $request->start_date;
+            $endDate = $request->end_date;
+            $query->whereBetween('created_at', [$startDate, $endDate]);
+        }
+
+        $rekap = $query->get();
 
         foreach ($rekap as $item) {
             if ($item->id_detail_simpanan != null) {
@@ -211,7 +219,7 @@ class RekapTransaksiController extends Controller
                     $totalPemasukan += $jumlahMasuk;
                     $jenis_transaksi = 'Angsuran Pinjaman';
                 }
-                
+
                 array_push($jumlah_masuk, $jumlahMasuk);
                 array_push($jumlah_keluar, $jumlahKeluar);
             }

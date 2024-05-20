@@ -103,6 +103,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('kepala/laporan/export/pdf', [LaporanController::class, 'export'])->name('laporan.export');
 
         Route::get('kepala/rekap', [RekapTransaksiController::class, 'index'])->name('rekap');
+        Route::get('kepala/rekap/filter', [RekapTransaksiController::class, 'index'])->name('rekap.filter');
         Route::get('kepala/rekap/export/pdf', [RekapTransaksiController::class, 'export'])->name('rekap.export');
 
         Route::get('kepala/profile', [ProfileController::class, 'index'])->name('profile');
