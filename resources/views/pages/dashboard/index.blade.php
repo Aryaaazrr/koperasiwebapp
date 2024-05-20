@@ -195,7 +195,7 @@
                                         class="d-flex justify-content-end mb-2">
                                         <select name="tahun" id="tahun" class="form-select cursor-pointer">
                                             <option value="" selected disabled>Filter Tahun</option>
-                                            @foreach ($jenisTahun as $year)
+                                            @foreach ($anggotaTahun as $year)
                                                 <option value="{{ $year }}"
                                                     {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}
                                                 </option>

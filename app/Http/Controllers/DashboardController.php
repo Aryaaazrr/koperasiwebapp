@@ -49,24 +49,18 @@ class DashboardController extends Controller
                 ->sortDesc()
                 ->toArray();
 
-            $jenisTahun = Anggota::selectRaw('YEAR(tanggal_masuk) as year')
-                ->distinct()
-                ->pluck('year')
-                ->sortDesc()
-                ->toArray();
-
             if ($selectedYear) {
                 $anggotaData = Anggota::whereYear('tanggal_masuk', $selectedYear)->get();
-                $jenisTahun = Anggota::whereYear('tanggal_masuk', $selectedYear)->get();
+                $jenisData = Anggota::whereYear('tanggal_masuk', $selectedYear)->get();
             } else {
                 $anggotaData = Anggota::all();
-                $jenisTahun = Anggota::all();
+                $jenisaData = Anggota::all();
             }
 
             $anggotaChart = $lineChartAnggota->build($selectedYear);
             $jenisAnggotaChart = $pieChartJenisAnggota->build($selectedYear);
 
-            return view('pages.dashboard.index', compact('jumlahAnggota', 'jumlahPegawai', 'jumlahSimpanan', 'jumlahPinjaman', 'anggotaChart', 'jenisAnggotaChart', 'pertumbuhanAnggota', 'anggotaTahun', 'jenisTahun', 'selectedYear'));
+            return view('pages.dashboard.index', compact('jumlahAnggota', 'jumlahPegawai', 'jumlahSimpanan', 'jumlahPinjaman', 'anggotaChart', 'jenisAnggotaChart', 'pertumbuhanAnggota', 'anggotaTahun', 'selectedYear'));
         } else {
             $setor = DetailSimpanan::where('jenis_transaksi', '=', 'Setor')
                 ->get();
