@@ -91,6 +91,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('kepala/pinjaman', [PinjamanController::class, 'index'])->name('pinjaman');
         Route::get('kepala/pinjaman/add', [PinjamanController::class, 'create'])->name('pinjaman.create');
         Route::post('kepala/pinjaman/add', [PinjamanController::class, 'store'])->name('pinjaman.store');
+        Route::get('kepala/pinjaman/kredit', [PinjamanController::class, 'edit'])->name('pinjaman.edit');
         Route::get('kepala/pinjaman/view/{id}', [PinjamanController::class, 'show'])->name('pinjaman.show');
         Route::put('kepala/pinjaman/view/{id}', [PinjamanController::class, 'update'])->name('pinjaman.update');
         Route::get('kepala/pinjaman/{id}', [PinjamanController::class, 'destroy'])->name('pinjaman.destroy');
@@ -140,6 +141,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('pinjaman', [PinjamanController::class, 'index'])->name('pegawai.pinjaman');
         Route::get('pinjaman/add', [PinjamanController::class, 'create'])->name('pegawai.pinjaman.create');
         Route::post('pinjaman/add', [PinjamanController::class, 'store'])->name('pegawai.pinjaman.store');
+        Route::get('pinjaman/kredit', [PinjamanController::class, 'edit'])->name('pegawai.pinjaman.edit');
         Route::get('pinjaman/view/{id}', [PinjamanController::class, 'show'])->name('pegawai.pinjaman.show');
         Route::get('pinjaman/edit/{id}', [PinjamanController::class, 'edit'])->name('pegawai.pinjaman.edit');
         Route::put('pinjaman/edit/{id}', [PinjamanController::class, 'update'])->name('pegawai.pinjaman.update');
@@ -156,15 +158,4 @@ Route::middleware(['auth'])->group(function () {
         Route::get('profile', [ProfileController::class, 'index'])->name('pegawai.profile');
         Route::put('profile/{id}', [ProfileController::class, 'update'])->name('pegawai.profile.update');
     });
-});
-
-
-//admin
-Route::group(['middleware' => 'auth'], function () {
-
-    Route::get('/delete/{id}', [AnggotaController::class, 'delete'])->name('deletedata');
-
-    Route::get('/pageuser', [UserController::class, 'page'])->name('PageUser');
-    Route::get('/user', [UserController::class, 'index'])->name('user');
-    Route::get('/delete/{id}', [UserController::class, 'delete'])->name('deletedata');
 });

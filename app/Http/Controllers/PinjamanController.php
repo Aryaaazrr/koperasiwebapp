@@ -25,20 +25,20 @@ class PinjamanController extends Controller
      */
     public function index(Request $request)
     {
-        $simpanan = Pinjaman::with('anggota')->get();
+        $pinjaman = Pinjaman::with('anggota')->get();
 
         if ($request->ajax()) {
-            return DataTables::of($simpanan)
-                ->addColumn('DT_RowIndex', function ($simpanan) {
-                    return $simpanan->id_pinjaman;
+            return DataTables::of($pinjaman)
+                ->addColumn('DT_RowIndex', function ($pinjaman) {
+                    return $pinjaman->id_pinjaman;
                 })
-                ->addColumn('nama', function ($simpanan) {
-                    return $simpanan->anggota->nama;
+                ->addColumn('nama', function ($pinjaman) {
+                    return $pinjaman->anggota->nama;
                 })
                 ->toJson();
         }
 
-        return view('pages.pinjaman.index');
+        return view('pages.pinjaman.index', ['pinjaman' => $pinjaman]);
     }
 
     /**
@@ -174,7 +174,8 @@ class PinjamanController extends Controller
                     'angsuran_pokok' => $row->angsuran_pokok,
                     'bunga' => $row->bunga,
                     'subtotal_angsuran' => $row->subtotal_angsuran,
-                    'status_pelunasan' => $row->status_pelunasan
+                    'status_pelunasan' => $row->status_pelunasan,
+                    'keterangan' => $row->keterangan
                 ];
             }
 
@@ -188,9 +189,32 @@ class PinjamanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        //
+        $anggota = Anggota::with(['pinjaman.detail_pinjaman'])->get();
+        $rowData = [];
+
+        if ($request->ajax()) {
+            foreach ($anggota as $row) {
+                $jumlahTerlambat = 0;
+                $jumlahPinjaman = $row->pinjaman->count();
+
+                foreach ($row->pinjaman as $pinjaman) {
+                    $jumlahTerlambat += $pinjaman->detail_pinjaman()->where('keterangan', 'Terlambat')->count();
+                }
+
+                $rowData[] = [
+                    'DT_RowIndex' => $row->id_anggota,
+                    'nama_anggota' => $row->nama,
+                    'jumlah_pinjaman' => $jumlahPinjaman,
+                    'jumlah_terlambat' => $jumlahTerlambat
+                ];
+            }
+
+            return DataTables::of($rowData)->toJson();
+        }
+
+        return view('pages.pinjaman.edit');
     }
 
     /**
@@ -228,6 +252,15 @@ class PinjamanController extends Controller
 
                 foreach ($detailPinjaman as $index => $detail) {
                     if ($index < $angsuranDibayar) {
+                        $today = Carbon::now();
+                        $dueDate = Carbon::parse($detail->tanggal_jatuh_tempo);
+
+                        if ($today->greaterThan($dueDate)) {
+                            $detail->keterangan = 'Terlambat';
+                        } else {
+                            $detail->keterangan = 'Tepat Waktu';
+                        }
+
                         $detail->status_pelunasan = 'Lunas';
 
                         if (!$detail->save()) {

@@ -60,6 +60,7 @@
                             <th class="text-center">Angsuran Pokok</th>
                             <th class="text-center">Bunga</th>
                             <th class="text-center">Status</th>
+                            <th class="text-center">Keterangan</th>
                         </tr>
                     </thead>
                     <tbody class="text-center" style="font-size: 10pt">
@@ -192,6 +193,13 @@
                         {
                             data: 'status_pelunasan',
                             name: 'status_pelunasan'
+                        },
+                        {
+                            data: 'keterangan',
+                            name: 'keterangan',
+                            render: function(data, type, row) {
+                                return data ? data : '-';
+                            }
                         },
                     ],
                     rowCallback: function(row, data, index) {

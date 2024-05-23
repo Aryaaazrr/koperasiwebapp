@@ -19,10 +19,10 @@ class JenisAnggotaChart
     {
         $tahun = $tahun ?: date('Y');
 
-        $data = Anggota::select('jenis_kelamin', DB::raw('count(*) as total'))
+        $data = Anggota::select('jenis_anggota', DB::raw('count(*) as total'))
             ->whereYear('tanggal_masuk', $tahun)
-            ->groupBy('jenis_kelamin')
-            ->pluck('total', 'jenis_kelamin')->toArray();
+            ->groupBy('jenis_anggota')
+            ->pluck('total', 'jenis_anggota')->toArray();
 
         $anggotaPendiri = Anggota::where('jenis_anggota', 'Pendiri')
             ->whereYear('tanggal_masuk', $tahun)

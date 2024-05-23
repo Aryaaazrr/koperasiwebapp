@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Pinjaman')
-@section('subtitle', 'Data Pinjaman')
+@section('subtitle', 'Kredit Macet')
 
 @section('content')
 
@@ -20,34 +20,21 @@
                         </button>
                     </div>
                 @endif
-                <div class="d-flex justify-content-between">
-                    <div class="pb-2">
-                        @if (Auth::user()->id_role == 2)
-                            <a href='{{ route('pinjaman.create') }}' class="btn btn-primary">+ Tambah Data</a>
-                        @else
-                            <a href='{{ route('pegawai.pinjaman.create') }}' class="btn btn-primary">+ Tambah Data</a>
-                        @endif
-                    </div>
-                    <div class="pb-2">
-                        @if (Auth::user()->id_role == 2)
-                            <a href='{{ route('pinjaman.edit') }}' class="btn btn-secondary">Kredit Macet</a>
-                        @else
-                            <a href='{{ route('pegawai.pinjaman.edit') }}' class="btn btn-secondary">Kredit Macet</a>
-                        @endif
-                    </div>
+                <div class="pb-2">
+                    @if (Auth::user()->id_role == 2)
+                        <a href='{{ route('pinjaman') }}' class="btn btn-secondary">Kembali</a>
+                    @else
+                        <a href='{{ route('pegawai.pinjaman') }}' class="btn btn-secondary">Kembali</a>
+                    @endif
                 </div>
                 <div class="table-responsive p-0">
                     <table class="table table-hover table-bordered align-items-center" id="myTable">
                         <thead style="font-size: 10pt">
                             <tr style="background-color: rgb(187, 246, 201)">
                                 <th class="text-center">No</th>
-                                <th class="text-center">No. Pinjaman</th>
                                 <th class="text-center">Nama</th>
-                                <th class="text-center">Besar Pinjaman</th>
-                                <th class="text-center">Angsuran</th>
-                                <th class="text-center">Sisa Lancar</th>
-                                <th class="text-center">Status Pinjaman</th>
-                                <th class="text-center">Aksi</th>
+                                <th class="text-center">Jumlah Pinjaman</th>
+                                <th class="text-center">Jumlah Terlambat</th>
                             </tr>
                         </thead>
                         <tbody class="text-center" style="font-size: 10pt">
@@ -84,72 +71,23 @@
                         ordering: true,
                         responsive: true,
                         serverSide: true,
-                        ajax: "{{ route('pinjaman') }}",
+                        ajax: "{{ route('pinjaman.edit') }}",
                         columns: [{
                                 data: 'DT_RowIndex',
                                 name: 'DT_RowIndex'
                             },
                             {
-                                data: 'no_pinjaman',
-                                name: 'no_pinjaman'
+                                data: 'nama_anggota',
+                                name: 'nama_anggota'
                             },
                             {
-                                data: 'nama',
-                                name: 'nama'
+                                data: 'jumlah_pinjaman',
+                                name: 'jumlah_pinjaman'
                             },
                             {
-                                data: 'total_pinjaman',
-                                name: 'total_pinjaman',
-                                render: function(data) {
-                                    return parseInt(data).toLocaleString('id-ID', {
-                                        style: 'currency',
-                                        currency: 'IDR'
-                                    });
-                                }
+                                data: 'jumlah_terlambat',
+                                name: 'jumlah_terlambat'
                             },
-                            {
-                                data: 'angsuran',
-                                name: 'angsuran'
-                            },
-                            {
-                                data: 'sisa_lancar_keseluruhan',
-                                name: 'sisa_lancar_keseluruhan',
-                                render: function(data) {
-                                    return parseInt(data).toLocaleString('id-ID', {
-                                        style: 'currency',
-                                        currency: 'IDR'
-                                    });
-                                }
-                            },
-                            {
-                                data: 'status_pinjaman',
-                                name: 'status_pinjaman'
-                            },
-                            {
-                                data: null,
-                                render: function(data) {
-                                    var result = '<div class="row justify-content-center">' +
-                                        '<div class="col-auto">' +
-                                        '<a href="{{ route('pinjaman.show', '') }}/' + data.id_pinjaman +
-                                        '" style="font-size: 10pt" class="btn btn-secondary m-1 edit-btn" ' +
-                                        'data-id="' + data.id_pinjaman +
-                                        '">Lihat</a>';
-
-                                    if (data.status_pinjaman == 'Belum Lunas') {
-                                        result += '<a href="{{ route('pinjaman.destroy', '') }}/' + data
-                                            .id_pinjaman +
-                                            '" style="font-size: 10pt" class="btn btn-danger m-1 delete-btn" ' +
-                                            'data-id="' + data.id_pinjaman +
-                                            '">Hapus</a>';
-                                    }
-
-                                    result += '</div>' +
-                                        '</div>';
-
-                                    return result;
-                                }
-
-                            }
                         ],
                         rowCallback: function(row, data, index) {
                             var dt = this.api();

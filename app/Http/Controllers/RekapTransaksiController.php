@@ -28,8 +28,8 @@ class RekapTransaksiController extends Controller
         $totalPengeluaran = 0.00;
 
         if ($request->has(['start_date', 'end_date'])) {
-            $startDate = $request->start_date;
-            $endDate = $request->end_date;
+            $startDate = Carbon::parse($request->input('start_date'))->startOfDay();
+            $endDate = Carbon::parse($request->input('end_date'))->endOfDay();
             $query->whereBetween('created_at', [$startDate, $endDate]);
         }
 

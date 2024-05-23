@@ -23,6 +23,7 @@ return new class extends Migration
             $table->decimal('subtotal_angsuran', 10, 2);
             $table->timestamp('tanggal_jatuh_tempo')->notNull()->useCurrent();
             $table->enum('status_pelunasan', ['Belum Lunas', 'Lunas', 'Lewat Jatuh Tempo']);
+            $table->enum('keterangan', ['Tepat Waktu', 'Terlambat'])->nullable();
             $table->timestamps();
         });
     }
