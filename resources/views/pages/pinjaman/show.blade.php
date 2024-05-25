@@ -270,6 +270,13 @@
                             data: 'status_pelunasan',
                             name: 'status_pelunasan'
                         },
+                        {
+                            data: 'keterangan',
+                            name: 'keterangan',
+                            render: function(data, type, row) {
+                                return data ? data : '-';
+                            }
+                        },
                     ],
                     rowCallback: function(row, data, index) {
                         var dt = this.api();

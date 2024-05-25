@@ -161,7 +161,9 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Simpan</button>
+                            @if (Auth::user()->id_role == 2)
+                                <button type="submit" class="btn btn-success">Simpan</button>
+                            @endif
                         </div>
                         </form>
                     </div>
@@ -323,7 +325,7 @@
                                         '<div class="col-auto">' +
                                         '<button type="button" class="btn btn-warning mt-3 edit-btn" data-bs-toggle="modal" style="font-size: 10pt" data-bs-target="#editModal" data-id="' +
                                         data.id + '" data-keterangan="' + data.keterangan +
-                                        '" data-jumlah="' + roundValueJumlahUang + '">Edit</button>' +
+                                        '" data-jumlah="' + roundValueJumlahUang + '">Lihat</button>' +
                                         '</div>' +
                                         '</div>';
                                 }

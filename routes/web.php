@@ -143,7 +143,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('pinjaman/add', [PinjamanController::class, 'store'])->name('pegawai.pinjaman.store');
         Route::get('pinjaman/kredit', [PinjamanController::class, 'edit'])->name('pegawai.pinjaman.edit');
         Route::get('pinjaman/view/{id}', [PinjamanController::class, 'show'])->name('pegawai.pinjaman.show');
-        Route::get('pinjaman/edit/{id}', [PinjamanController::class, 'edit'])->name('pegawai.pinjaman.edit');
         Route::put('pinjaman/edit/{id}', [PinjamanController::class, 'update'])->name('pegawai.pinjaman.update');
         Route::get('pinjaman/export/pdf/{id}', [PinjamanController::class, 'export'])->name('pegawai.pinjaman.export');
 
@@ -153,6 +152,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('laporan/export/pdf', [LaporanController::class, 'export'])->name('pegawai.laporan.export');
 
         Route::get('rekap', [RekapTransaksiController::class, 'index'])->name('pegawai.rekap');
+        Route::get('rekap/filter', [RekapTransaksiController::class, 'index'])->name('pegawai.rekap.filter');
         Route::get('rekap/export/pdf', [RekapTransaksiController::class, 'export'])->name('pegawai.rekap.export');
 
         Route::get('profile', [ProfileController::class, 'index'])->name('pegawai.profile');

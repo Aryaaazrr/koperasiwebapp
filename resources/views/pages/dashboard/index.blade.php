@@ -253,33 +253,35 @@
                             </div>
                         @endif
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12 col-xl-12 order-0 mb-4 my-4">
-                            <div class="card border border-0 p-4">
-                                <div
-                                    class="card-header bg-white border border-0 d-flex align-items-center justify-content-start pb-0 m-0">
-                                    <h5 class="text-start">Pinjaman Jatuh Tempo</h5>
-                                </div>
-                                <div class="table-responsive p-0">
-                                    <table class="table table-hover table-bordered align-items-center" id="myTable">
-                                        <thead style="font-size: 10pt">
-                                            <tr style="background-color: rgb(187, 246, 201)">
-                                                <th class="text-center w-8">Angsuran Ke-</th>
-                                                <th class="text-center">Nama Anggota</th>
-                                                <th class="text-center">Tanggal Jatuh Tempo</th>
-                                                <th class="text-center">Angsuran Pokok</th>
-                                                <th class="text-center">Bunga 1%</th>
-                                                <th class="text-center">Status</th>
-                                                <th class="text-center">Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="text-center" style="font-size: 10pt">
-                                        </tbody>
-                                    </table>
+                    @if (Auth::user()->id_role != 1)
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-xl-12 order-0 mb-4 my-4">
+                                <div class="card border border-0 p-4">
+                                    <div
+                                        class="card-header bg-white border border-0 d-flex align-items-center justify-content-start pb-0 m-0">
+                                        <h5 class="text-start">Pinjaman Jatuh Tempo</h5>
+                                    </div>
+                                    <div class="table-responsive p-0">
+                                        <table class="table table-hover table-bordered align-items-center" id="myTable">
+                                            <thead style="font-size: 10pt">
+                                                <tr style="background-color: rgb(187, 246, 201)">
+                                                    <th class="text-center w-8">Angsuran Ke-</th>
+                                                    <th class="text-center">Nama Anggota</th>
+                                                    <th class="text-center">Tanggal Jatuh Tempo</th>
+                                                    <th class="text-center">Angsuran Pokok</th>
+                                                    <th class="text-center">Bunga 1%</th>
+                                                    <th class="text-center">Status</th>
+                                                    <th class="text-center">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-center" style="font-size: 10pt">
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>

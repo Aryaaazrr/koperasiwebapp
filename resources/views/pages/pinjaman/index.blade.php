@@ -228,7 +228,7 @@
                                         '<div class="col-auto">' +
                                         '<a href="{{ route('pegawai.pinjaman.show', '') }}/' + data
                                         .id_pinjaman +
-                                        '" style="font-size: 10pt" class="btn btn-secondary m-1 edit-btn" ' +
+                                        '" style="font-size: 10pt" class="btn btn-warning m-1 edit-btn" ' +
                                         'data-id="' + data.id +
                                         '">Lihat</a>' +
                                         '</div>' +

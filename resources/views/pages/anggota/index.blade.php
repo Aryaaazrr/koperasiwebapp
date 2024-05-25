@@ -366,7 +366,7 @@
                                         .id_anggota +
                                         '" style="font-size: 10pt" class="btn btn-warning m-1 edit-btn" ' +
                                         'data-id="' + data.id +
-                                        '">Edit</a>' +
+                                        '">Lihat</a>' +
                                         '</div>' +
                                         '</div>';
                                 }

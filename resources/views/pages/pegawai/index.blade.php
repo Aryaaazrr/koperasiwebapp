@@ -263,9 +263,9 @@
                                         '<div class="col-auto">' +
                                         '<a href="{{ route('pegawai.pegawai.edit', '') }}/' + data
                                         .id_users +
-                                        '" style="font-size: 10pt" class="btn btn-info m-1 edit-btn" ' +
+                                        '" style="font-size: 10pt" class="btn btn-warning m-1 edit-btn" ' +
                                         'data-id="' + data.id +
-                                        '">Edit</a>' +
+                                        '">Lihat</a>' +
                                         '</div>' +
                                         '</div>';
                                 }

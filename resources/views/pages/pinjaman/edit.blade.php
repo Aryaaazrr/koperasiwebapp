@@ -118,61 +118,23 @@
                         ordering: true,
                         responsive: true,
                         serverSide: true,
-                        ajax: "{{ route('pegawai.pinjaman') }}",
+                        ajax: "{{ route('pegawai.pinjaman.edit') }}",
                         columns: [{
                                 data: 'DT_RowIndex',
                                 name: 'DT_RowIndex'
                             },
                             {
-                                data: 'no_pinjaman',
-                                name: 'no_pinjaman'
+                                data: 'nama_anggota',
+                                name: 'nama_anggota'
                             },
                             {
-                                data: 'nama',
-                                name: 'nama'
+                                data: 'jumlah_pinjaman',
+                                name: 'jumlah_pinjaman'
                             },
                             {
-                                data: 'total_pinjaman',
-                                name: 'total_pinjaman',
-                                render: function(data) {
-                                    return parseInt(data).toLocaleString('id-ID', {
-                                        style: 'currency',
-                                        currency: 'IDR'
-                                    });
-                                }
+                                data: 'jumlah_terlambat',
+                                name: 'jumlah_terlambat'
                             },
-                            {
-                                data: 'angsuran',
-                                name: 'angsuran'
-                            },
-                            {
-                                data: 'sisa_lancar_keseluruhan',
-                                name: 'sisa_lancar_keseluruhan',
-                                render: function(data) {
-                                    return parseInt(data).toLocaleString('id-ID', {
-                                        style: 'currency',
-                                        currency: 'IDR'
-                                    });
-                                }
-                            },
-                            {
-                                data: 'status_pinjaman',
-                                name: 'status_pinjaman'
-                            },
-                            {
-                                data: null,
-                                render: function(data) {
-                                    return '<div class="row justify-content-center">' +
-                                        '<div class="col-auto">' +
-                                        '<a href="{{ route('pegawai.pinjaman.show', '') }}/' + data
-                                        .id_pinjaman +
-                                        '" style="font-size: 10pt" class="btn btn-secondary m-1 edit-btn" ' +
-                                        'data-id="' + data.id +
-                                        '">Lihat</a>' +
-                                        '</div>' +
-                                        '</div>';
-                                }
-                            }
                         ],
                         rowCallback: function(row, data, index) {
                             var dt = this.api();

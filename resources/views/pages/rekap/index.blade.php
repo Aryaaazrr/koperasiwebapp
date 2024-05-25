@@ -11,25 +11,29 @@
                     <div class="card-body">
                         <div class="row d-flex justify-content-between">
                             <div class="col-md-12">
-                                <form action="{{ route('rekap.filter') }}" method="GET" class="form-control">
-                                    <span class="d-flex -mb-4">
-                                        <h5>Pilih Rentang Waktu :</h5>
-                                    </span>
-                                    @csrf
-                                    <div class="col d-flex justify-content-start align-items-center">
-                                        <input type="date" name="start_date" class="form-control h-50 me-2 mb-2"
-                                            required>
-                                        <input type="date" name="end_date" class="form-control h-50 me-2 mb-2" required>
-                                        <button type="submit" class="btn btn-primary">Filter</button>
-                                    </div>
-                                    <h4><b>Pendapatan : Rp {{ number_format($pendapatan, 2, ',', '.') }}</b>
-                                    </h4>
-                                    <h4 class="mt-4">
-                                        <b>Pemasukan : Rp {{ number_format($totalPemasukan, 2, ',', '.') }}</b>
-                                    </h4>
-                                    <h4 class="mt-4">
-                                        <b>Pengeluaran : Rp {{ number_format($totalPengeluaran, 2, ',', '.') }}</b>
-                                    </h4>
+                                @if (Auth::user()->id_role == 2)
+                                    <form action="{{ route('rekap.filter') }}" method="GET" class="form-control">
+                                    @else
+                                        <form action="{{ route('pegawai.rekap.filter') }}" method="GET"
+                                            class="form-control">
+                                @endif
+                                <span class="d-flex -mb-4">
+                                    <h5>Pilih Rentang Waktu :</h5>
+                                </span>
+                                @csrf
+                                <div class="col d-flex justify-content-start align-items-center">
+                                    <input type="date" name="start_date" class="form-control h-50 me-2 mb-2" required>
+                                    <input type="date" name="end_date" class="form-control h-50 me-2 mb-2" required>
+                                    <button type="submit" class="btn btn-primary">Filter</button>
+                                </div>
+                                <h4><b>Pendapatan : Rp {{ number_format($pendapatan, 2, ',', '.') }}</b>
+                                </h4>
+                                <h4 class="mt-4">
+                                    <b>Pemasukan : Rp {{ number_format($totalPemasukan, 2, ',', '.') }}</b>
+                                </h4>
+                                <h4 class="mt-4">
+                                    <b>Pengeluaran : Rp {{ number_format($totalPengeluaran, 2, ',', '.') }}</b>
+                                </h4>
                                 </form>
                             </div>
                             <div class="col-md-6">
