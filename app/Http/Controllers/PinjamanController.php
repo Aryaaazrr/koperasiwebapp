@@ -25,7 +25,12 @@ class PinjamanController extends Controller
      */
     public function index(Request $request)
     {
-        $pinjaman = Pinjaman::with('anggota')->get();
+        return view('pages.pinjaman.index');
+    }
+
+    public function belumLunas(Request $request)
+    {
+        $pinjaman = Pinjaman::where('status_pinjaman', 'Belum Lunas')->with('anggota')->get();
 
         if ($request->ajax()) {
             return DataTables::of($pinjaman)
@@ -37,8 +42,22 @@ class PinjamanController extends Controller
                 })
                 ->toJson();
         }
+    }
 
-        return view('pages.pinjaman.index', ['pinjaman' => $pinjaman]);
+    public function Lunas(Request $request)
+    {
+        $pinjaman = Pinjaman::where('status_pinjaman', 'Lunas')->with('anggota')->get();
+
+        if ($request->ajax()) {
+            return DataTables::of($pinjaman)
+                ->addColumn('DT_RowIndex', function ($pinjaman) {
+                    return $pinjaman->id_pinjaman;
+                })
+                ->addColumn('nama', function ($pinjaman) {
+                    return $pinjaman->anggota->nama;
+                })
+                ->toJson();
+        }
     }
 
     /**
@@ -191,30 +210,63 @@ class PinjamanController extends Controller
      */
     public function edit(Request $request)
     {
-        $anggota = Anggota::with(['pinjaman.detail_pinjaman'])->get();
+        return view('pages.pinjaman.edit');
+    }
+
+    public function dataDiragukan(Request $request)
+    {
+        $pinjaman = Pinjaman::whereHas('detail_pinjaman', function ($query) {
+            $query->where('status_pelunasan', 'Lewat Jatuh Tempo');
+        })->with('anggota')->get();
+
         $rowData = [];
 
-        if ($request->ajax()) {
-            foreach ($anggota as $row) {
-                $jumlahTerlambat = 0;
-                $jumlahPinjaman = $row->pinjaman->count();
+        foreach ($pinjaman as $value) {
+            $jumlahTerlambat = $value->detail_pinjaman()->where('keterangan', 'Terlambat')->count();
 
-                foreach ($row->pinjaman as $pinjaman) {
-                    $jumlahTerlambat += $pinjaman->detail_pinjaman()->where('keterangan', 'Terlambat')->count();
-                }
-
-                $rowData[] = [
-                    'DT_RowIndex' => $row->id_anggota,
-                    'nama_anggota' => $row->nama,
-                    'jumlah_pinjaman' => $jumlahPinjaman,
-                    'jumlah_terlambat' => $jumlahTerlambat
-                ];
-            }
-
-            return DataTables::of($rowData)->toJson();
+            $rowData[] = [
+                'DT_RowIndex' => $value->id_pinjaman,
+                'id_pinjaman' => $value->id_pinjaman,
+                'no_pinjaman' => $value->no_pinjaman,
+                'nama' => $value->anggota->nama,
+                'total_pinjaman' => $value->total_pinjaman,
+                'angsuran' => $value->angsuran,
+                'sisa_lancar_keseluruhan' => $value->sisa_lancar_keseluruhan,
+                'status_pinjaman' => $value->status_pinjaman,
+                'jumlah_terlambat' => $jumlahTerlambat,
+            ];
         }
 
-        return view('pages.pinjaman.edit');
+        return DataTables::of($rowData)->toJson();
+    }
+
+    public function dataMacet(Request $request)
+    {
+        $oneYearAgo = Carbon::now()->subYear();
+
+        $pinjaman = Pinjaman::whereHas('detail_pinjaman', function ($query) use ($oneYearAgo) {
+            $query->where('status_pelunasan', 'Lewat Jatuh Tempo')
+                ->where('created_at', '<=', $oneYearAgo);
+        })->with('anggota')->get();
+
+        $rowData = [];
+
+        foreach ($pinjaman as $value) {
+            $jumlahTerlambat = $value->detail_pinjaman()->where('keterangan', 'Terlambat')->count();
+
+            $rowData[] = [
+                'DT_RowIndex' => $value->id_pinjaman,
+                'no_pinjaman' => $value->no_pinjaman,
+                'nama' => $value->anggota->nama,
+                'total_pinjaman' => $value->total_pinjaman,
+                'angsuran' => $value->angsuran,
+                'sisa_lancar_keseluruhan' => $value->sisa_lancar_keseluruhan,
+                'status_pinjaman' => $value->status_pinjaman,
+                'jumlah_terlambat' => $jumlahTerlambat,
+            ];
+        }
+
+        return DataTables::of($rowData)->toJson();
     }
 
     /**

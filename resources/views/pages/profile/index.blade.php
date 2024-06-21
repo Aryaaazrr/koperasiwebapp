@@ -7,7 +7,7 @@
     <main class="container">
         <div class="container-fluid py-4">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header pb-0">
                             <div class="d-flex align-items-center">
@@ -92,42 +92,28 @@
                                             value="{{ Auth::user()->no_telp }}">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Ganti Password</label>
-                                        <input class="form-control" type="password" name="new_password"
-                                            placeholder="Password Baru">
+                                @if (Auth::user()->id_role != 3)
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="example-text-input" class="form-control-label">Ganti
+                                                Password</label>
+                                            <input class="form-control" type="password" name="new_password"
+                                                placeholder="Password Baru">
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
                             <hr class="horizontal dark">
-                            <div class="row mt-4">
-                                <div class="col-md-12 text-end">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-warning">Perbarui</button>
+                            @if (Auth::user()->id_role != 3)
+                                <div class="row mt-4">
+                                    <div class="col-md-12 text-end">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-warning">Perbarui</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                             </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card card-profile">
-                        <img src="https://th.bing.com/th/id/R.8c4ed00bea132bf2f533e039485b065d?rik=7dA%2b1z6b8SydGw&riu=http%3a%2f%2fjti.polije.ac.id%2fimg%2fpages%2fpage_64f6efc15d8e6.jpg&ehk=9HvXn%2bx4O3QX63WH6JVXihekWTubnjx%2bQ61bNda7uYk%3d&risl=&pid=ImgRaw&r=0"
-                            alt="Image placeholder" class="card-img-top">
-                        <div class="card-body pt-0">
-                            <div class="text-center mt-4">
-                                <h5>
-                                    {{ Auth::user()->nama }}
-                                </h5>
-                                <div class="h6 font-weight-300">
-                                    <i class="ni location_pin mr-2"></i>{{ Auth::user()->email }}
-                                </div>
-                                <div class="h6 mt-4">
-                                    <i class="ni education_hat mr-2"></i>Politeknik Negeri Jember
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

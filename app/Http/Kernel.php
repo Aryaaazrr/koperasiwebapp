@@ -67,7 +67,7 @@ class Kernel extends HttpKernel
         'ceklevel' => \App\Http\Middleware\CekLevel::class,
         'only_sign_in' => \App\Http\Middleware\Only_Sign_In::class,
         'admin' => \App\Http\Middleware\Only_Admin::class,
-        'kepala' => \App\Http\Middleware\Only_Kepala_Koperasi::class,
+        'pengurus' => \App\Http\Middleware\Only_Kepala_Koperasi::class,
         'pegawai' => \App\Http\Middleware\Only_Pegawai::class,
     ];
 }

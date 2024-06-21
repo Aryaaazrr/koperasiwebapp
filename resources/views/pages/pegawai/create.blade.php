@@ -79,7 +79,7 @@
                 <select class="form-select cursor-pointer" aria-label="Default select example" id="role" name="role"
                     value="{{ old('role') }}" required>
                     <option value="" selected disabled>Pilih Role Pengguna</option>
-                    <option value="2">Kepala Koperasi</option>
+                    <option value="2">Pengurus Koperasi</option>
                     <option value="3">Pegawai Koperasi</option>
                 </select>
             </div>

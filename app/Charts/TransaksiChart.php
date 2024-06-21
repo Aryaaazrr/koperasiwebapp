@@ -21,14 +21,12 @@ class TransaksiChart
     public function build($tahun = null): PieChart
     {
         $tahun = $tahun ?: date('Y');
-        $bulan = date('m');
 
         $totalPemasukan = 0.00;
         $totalPengeluaran = 0.00;
 
         $rekap = HistoryTransaksi::with('users', 'anggota', 'detail_simpanan', 'pinjaman', 'detail_pinjaman')
             ->whereYear('created_at', $tahun)
-            ->whereMonth('created_at', $bulan)
             ->get();
 
         foreach ($rekap as $item) {

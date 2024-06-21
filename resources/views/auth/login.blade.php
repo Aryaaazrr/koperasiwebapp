@@ -4,14 +4,15 @@
 
 @section('content')
     <section>
-        <div class="page-header min-vh-100 min-vw-100">
+        <div class="page-header min-vh-100 min-vw-200" >
             <div class="container">
+                <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-13 mx-auto">
+                <div class="card"> 
                 <div class="row">
-                    <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-9 mx-auto">
                         <div class="card card-plain">
                             <div class="card-header pb-0 text-start">
                                 <h4 class="font-weight-bolder">Sign In</h4>
-                                <p class="mb-0">Enter your email and password to sign in</p>
+                                <p class="mb-0">Enter your username and password to sign in</p>
                             </div>
                             <div class="card-body">
                                 @if ($errors->any())
@@ -28,7 +29,7 @@
                                     @csrf
                                     <div class="mb-3">
                                         <input type="text" name="username" class="form-control form-control-lg"
-                                            placeholder="Username" aria-label="Username" value="{{ old('username') }}">
+                                        placeholder="Username" aria-label="Username" value="{{ old('username') }}">
                                     </div>
                                     {{-- @error('email') --}}
                                     {{-- <small>{{ $message }}</small> --}}
@@ -56,6 +57,7 @@
                         </div> --}}
                 </div>
             </div>
+        </div>
         </div>
     </section>
 @endsection

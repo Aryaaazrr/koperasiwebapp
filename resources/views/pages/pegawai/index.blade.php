@@ -35,7 +35,7 @@
                         <thead style="font-size: 10pt">
                             <tr style="background-color: rgb(187, 246, 201)">
                                 <th class="text-center">No</th>
-                                <th class="text-center">NIK</th>
+                                {{-- <th class="text-center">NIK</th> --}}
                                 <th class="text-center">Nama</th>
                                 <th class="text-center">Jenis Kelamin</th>
                                 <th class="text-center">Alamat</th>
@@ -84,10 +84,10 @@
                                 data: 'DT_RowIndex',
                                 name: 'DT_RowIndex'
                             },
-                            {
-                                data: 'nik',
-                                name: 'nik'
-                            },
+                            // {
+                            //     data: 'nik',
+                            //     name: 'nik'
+                            // },
                             {
                                 data: 'nama',
                                 name: 'nama'
@@ -123,7 +123,7 @@
                                 }
                             }
                         ],
-                        order: [
+                        order : [
                             [0, 'desc']
                         ],
                         rowCallback: function(row, data, index) {
@@ -160,10 +160,10 @@
                                 data: 'DT_RowIndex',
                                 name: 'DT_RowIndex'
                             },
-                            {
-                                data: 'nik',
-                                name: 'nik'
-                            },
+                            // {
+                            //     data: 'nik',
+                            //     name: 'nik'
+                            // },
                             {
                                 data: 'nama',
                                 name: 'nama'
@@ -199,7 +199,7 @@
                                 }
                             }
                         ],
-                        order: [
+                        order : [
                             [0, 'desc']
                         ],
                         rowCallback: function(row, data, index) {
@@ -236,10 +236,10 @@
                                 data: 'DT_RowIndex',
                                 name: 'DT_RowIndex'
                             },
-                            {
-                                data: 'nik',
-                                name: 'nik'
-                            },
+                            // {
+                            //     data: 'nik',
+                            //     name: 'nik'
+                            // },
                             {
                                 data: 'nama',
                                 name: 'nama'
@@ -263,15 +263,15 @@
                                         '<div class="col-auto">' +
                                         '<a href="{{ route('pegawai.pegawai.edit', '') }}/' + data
                                         .id_users +
-                                        '" style="font-size: 10pt" class="btn btn-warning m-1 edit-btn" ' +
+                                        '" style="font-size: 10pt" class="btn btn-info m-1 warning-btn" ' +
                                         'data-id="' + data.id +
-                                        '">Lihat</a>' +
+                                        '">LIhat</a>' +
                                         '</div>' +
                                         '</div>';
                                 }
                             }
                         ],
-                        order: [
+                        order : [
                             [0, 'desc']
                         ],
                         rowCallback: function(row, data, index) {

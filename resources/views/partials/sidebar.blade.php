@@ -27,7 +27,7 @@
                         <img src="{{ asset('/icon/menuicon/dashboard.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2" style="max-height: 30px; max-width: 25px"
                             alt="main_logo">
-                        <span class="nav-link-text ms-1">Dashboard</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Dashboard</span>
                     </a>
                 @elseif (Auth::user()->id_role == 2)
                     <a class="@if (request()->is('kepala/dashboard')) nav-link @else nav-link collapsed @endif"
@@ -35,7 +35,7 @@
                         <img src="{{ asset('/icon/menuicon/dashboard.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2" style="max-height: 30px; max-width: 25px"
                             alt="main_logo">
-                        <span class="nav-link-text ms-1">Dashboard</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Dashboard</span>
                     </a>
                 @else
                     <a class="@if (request()->is('pegawai/dashboard')) nav-link @else nav-link collapsed @endif"
@@ -43,7 +43,7 @@
                         <img src="{{ asset('/icon/menuicon/dashboard.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2" style="max-height: 30px; max-width: 25px"
                             alt="main_logo">
-                        <span class="nav-link-text ms-1">Dashboard</span>
+                        <span class="nav-link-text ms-1"style="font-size: 13pt">Dashboard</span>
                     </a>
                 @endif
             </li>
@@ -55,7 +55,7 @@
                         <img src="{{ asset('/icon/menuicon/computer-worker.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2" style="max-height: 30px; max-width: 25px"
                             alt="main_logo">
-                        <span class="nav-link-text ms-1">Pegawai</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Pegawai</span>
                     </a>
                 @elseif (Auth::user()->id_role == 2)
                     <a class="@if (request()->is('kepala/pegawai')) nav-link active @else nav-link collapsed @endif"
@@ -63,16 +63,16 @@
                         <img src="{{ asset('/icon/menuicon/computer-worker.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2" style="max-height: 30px; max-width: 25px"
                             alt="main_logo">
-                        <span class="nav-link-text ms-1">Pegawai</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Pegawai</span>
                     </a>
-                @else
+                {{-- @else
                     <a class="@if (request()->is('pegawai')) nav-link active @else nav-link collapsed @endif"
                         href="{{ route('pegawai.pegawai') }}">
                         <img src="{{ asset('/icon/menuicon/computer-worker.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2" style="max-height: 30px; max-width: 25px"
                             alt="main_logo">
                         <span class="nav-link-text ms-1">Pegawai</span>
-                    </a>
+                    </a> --}}
                 @endif
             </li>
 
@@ -83,7 +83,7 @@
                         <img src="{{ asset('/icon/menuicon/customers.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2" style="max-height: 30px; max-width: 25px"
                             alt="main_logo">
-                        <span class="nav-link-text ms-1">Anggota</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Anggota</span>
                     </a>
                 @elseif (Auth::user()->id_role == 2)
                     <a class="@if (request()->is('kepala/anggota')) nav-link active @else nav-link collapsed @endif"
@@ -91,7 +91,7 @@
                         <img src="{{ asset('/icon/menuicon/customers.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2" style="max-height: 30px; max-width: 25px"
                             alt="main_logo">
-                        <span class="nav-link-text ms-1">Anggota</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Anggota</span>
                     </a>
                 @else
                     <a class="@if (request()->is('anggota')) nav-link active @else nav-link collapsed @endif"
@@ -99,7 +99,7 @@
                         <img src="{{ asset('/icon/menuicon/customers.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2" style="max-height: 30px; max-width: 25px"
                             alt="main_logo">
-                        <span class="nav-link-text ms-1">Anggota</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Anggota</span>
                     </a>
                 @endif
             </li>
@@ -111,7 +111,7 @@
                         <img src="{{ asset('/icon/menuicon/reduction.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2" style="max-height: 30px; max-width: 25px"
                             alt="main_logo">
-                        <span class="nav-link-text ms-1">Simpanan</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Simpanan</span>
                     </a>
                 @elseif (Auth::user()->id_role == 3)
                     <a class="@if (request()->is('simpanan')) nav-link active @else nav-link collapsed @endif"
@@ -119,7 +119,7 @@
                         <img src="{{ asset('/icon/menuicon/reduction.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2" style="max-height: 30px; max-width: 25px"
                             alt="main_logo">
-                        <span class="nav-link-text ms-1">Simpanan</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Simpanan</span>
                     </a>
                 @endif
             </li>
@@ -131,7 +131,7 @@
                         <img src="{{ asset('/icon/menuicon/loan.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2"
                             style="max-height: 30px; max-width: 25px" alt="main_logo">
-                        <span class="nav-link-text ms-1">Pinjaman</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Pinjaman</span>
                     </a>
                 @elseif (Auth::user()->id_role == 3)
                     <a class="@if (request()->is('pinjaman')) nav-link active @else nav-link collapsed @endif"
@@ -139,7 +139,7 @@
                         <img src="{{ asset('/icon/menuicon/loan.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2"
                             style="max-height: 30px; max-width: 25px" alt="main_logo">
-                        <span class="nav-link-text ms-1">Pinjaman</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Pinjaman</span>
                     </a>
                 @endif
             </li>
@@ -151,7 +151,7 @@
                         <img src="{{ asset('/icon/menuicon/seo-report.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2"
                             style="max-height: 30px; max-width: 25px" alt="main_logo">
-                        <span class="nav-link-text ms-1">Laporan</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Laba/Rugi</span>
                     </a>
                 @elseif (Auth::user()->id_role == 3)
                     <a class="@if (request()->is('laporan')) nav-link active @else nav-link collapsed @endif"
@@ -159,7 +159,7 @@
                         <img src="{{ asset('/icon/menuicon/seo-report.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2"
                             style="max-height: 30px; max-width: 25px" alt="main_logo">
-                        <span class="nav-link-text ms-1">Laporan</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Laba/Rugi</span>
                     </a>
                 @endif
             </li>
@@ -171,7 +171,7 @@
                         <img src="{{ asset('/icon/menuicon/checklist.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2"
                             style="max-height: 30px; max-width: 25px" alt="main_logo">
-                        <span class="nav-link-text ms-1">Rekap Transaksi</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Rekap Transaksi</span>
                     </a>
                 @elseif (Auth::user()->id_role == 3)
                     <a class="@if (request()->is('laporan')) nav-link active @else nav-link collapsed @endif"
@@ -179,7 +179,7 @@
                         <img src="{{ asset('/icon/menuicon/checklist.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2"
                             style="max-height: 30px; max-width: 25px" alt="main_logo">
-                        <span class="nav-link-text ms-1">Rekap Transaksi</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Rekap Transaksi</span>
                     </a>
                 @endif
             </li>
@@ -196,7 +196,7 @@
                         <img src="{{ asset('icon/menuicon/profile.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2"
                             style="max-height: 30px; max-width: 25px" alt="main_logo">
-                        <span class="nav-link-text ms-1">Profile</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Profile</span>
                     </a>
                 @elseif (Auth::user()->id_role == 2)
                     <a class="@if (request()->is('kepala/profile')) nav-link active @else nav-link collapsed @endif"
@@ -204,7 +204,7 @@
                         <img src="{{ asset('icon/menuicon/profile.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2"
                             style="max-height: 30px; max-width: 25px" alt="main_logo">
-                        <span class="nav-link-text ms-1">Profile</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Profile</span>
                     </a>
                 @else
                     <a class="@if (request()->is('pegawai/profile')) nav-link active @else nav-link collapsed @endif"
@@ -212,7 +212,7 @@
                         <img src="{{ asset('icon/menuicon/profile.png') }}"
                             class="navbar-brand-img h-50 2em text-center me-2"
                             style="max-height: 30px; max-width: 25px" alt="main_logo">
-                        <span class="nav-link-text ms-1">profile</span>
+                        <span class="nav-link-text ms-1" style="font-size: 13pt">Profile</span>
                     </a>
                 @endif
             </li>

@@ -218,6 +218,9 @@
                                 }
                             }
                         ],
+                        order : [
+                            [0, 'desc']
+                        ],
                         rowCallback: function(row, data, index) {
                             var dt = this.api();
                             $(row).attr('data-id', data.id);
@@ -396,6 +399,9 @@
                                         '</div>';
                                 }
                             }
+                        ],
+                        order : [
+                            [0, 'desc']
                         ],
                         rowCallback: function(row, data, index) {
                             var dt = this.api();

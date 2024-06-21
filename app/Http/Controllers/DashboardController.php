@@ -27,11 +27,11 @@ class DashboardController extends Controller
     public function index(SHUChart $lineChart, TransaksiChart $pieChart, AnggotaChart $lineChartAnggota, JenisAnggotaChart $pieChartJenisAnggota, Request $request)
     {
         $jumlahAnggota = Anggota::count();
-        $jumlahPegawai = User::where('id_role', '=', '3')->count();
+        $jumlahPegawai = User::where('id_role', '!=', '1')->count();
         $jumlahSimpanan = Simpanan::count();
         $jumlahPinjaman = Pinjaman::count();
 
-        $jumlahAnggotaBulanLalu = Anggota::whereMonth('tanggal_masuk', '=', Carbon::now()->subMonth()->month)->count();
+        $jumlahAnggotaBulanLalu = Anggota::whereMonth('created_at', '=', Carbon::now()->subMonth()->month)->count();
 
         $pertumbuhanAnggota = 0;
         if ($jumlahAnggotaBulanLalu > 0) {
@@ -43,15 +43,15 @@ class DashboardController extends Controller
         $selectedYear = $request->get('tahun');
 
         if (Auth::user()->id_role == 1) {
-            $anggotaTahun = Anggota::selectRaw('YEAR(tanggal_masuk) as year')
+            $anggotaTahun = Anggota::selectRaw('YEAR(created_at) as year')
                 ->distinct()
                 ->pluck('year')
                 ->sortDesc()
                 ->toArray();
 
             if ($selectedYear) {
-                $anggotaData = Anggota::whereYear('tanggal_masuk', $selectedYear)->get();
-                $jenisData = Anggota::whereYear('tanggal_masuk', $selectedYear)->get();
+                $anggotaData = Anggota::whereYear('created_at', $selectedYear)->get();
+                $jenisData = Anggota::whereYear('created_at', $selectedYear)->get();
             } else {
                 $anggotaData = Anggota::all();
                 $jenisaData = Anggota::all();
@@ -93,7 +93,7 @@ class DashboardController extends Controller
             $rekap = HistoryTransaksi::with('users', 'anggota', 'detail_simpanan', 'pinjaman', 'detail_pinjaman')->orderBy('created_at', 'desc')->get();
 
             $shuChart = $lineChart->build($selectedYear);
-            $transaksiChart = $pieChart->build();
+            $transaksiChart = $pieChart->build($selectedYear);
 
             $jumlahMasuk = 0.00;
             $jumlahKeluar = 0.00;
@@ -128,7 +128,7 @@ class DashboardController extends Controller
                 }
             }
 
-            $pendapatan = abs($totalPemasukan - $totalPengeluaran);
+            $pendapatan = $totalPemasukan - $totalPengeluaran;
 
             $cek_detail_pinjaman = DetailPinjaman::where('status_pelunasan', 'Belum Lunas')->with(['pinjaman', 'users'])->get();
             foreach ($cek_detail_pinjaman as $row) {

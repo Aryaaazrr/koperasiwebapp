@@ -35,17 +35,14 @@
                         <thead style="font-size: 10pt">
                             <tr style="background-color: rgb(187, 246, 201)">
                                 <th class="text-center">No</th>
-                                <th class="text-center">NIK</th>
                                 <th class="text-center">No. Anggota</th>
                                 <th class="text-center">Nama</th>
-                                <th class="text-center">Tanggal Masuk</th>
+                                <th class="text-center">Jenis Anggota</th>
                                 <th class="text-center">Alamat</th>
                                 <th class="text-center">Pekerjaan</th>
                                 <th class="text-center">No. Handphone</th>
-                                @if (Auth::user()->id_role != 1)
-                                    <th class="text-center">Transaksi</th>
-                                @endif
                                 <th class="text-center">Aksi</th>
+
                             </tr>
                         </thead>
                         <tbody class="text-center" style="font-size: 10pt">
@@ -90,10 +87,6 @@
                                 name: 'DT_RowIndex'
                             },
                             {
-                                data: 'nik',
-                                name: 'nik'
-                            },
-                            {
                                 data: 'no_anggota',
                                 name: 'no_anggota'
                             },
@@ -102,8 +95,8 @@
                                 name: 'nama'
                             },
                             {
-                                data: 'tanggal_masuk',
-                                name: 'tanggal_masuk'
+                                data: 'jenis_anggota',
+                                name: 'jenis_anggota'
                             },
                             {
                                 data: 'alamat',
@@ -136,6 +129,9 @@
                                         '</div>';
                                 }
                             }
+                        ],
+                        order: [
+                            [0, 'desc']
                         ],
                         rowCallback: function(row, data, index) {
                             var dt = this.api();
@@ -172,10 +168,6 @@
                                 name: 'DT_RowIndex'
                             },
                             {
-                                data: 'nik',
-                                name: 'nik'
-                            },
-                            {
                                 data: 'no_anggota',
                                 name: 'no_anggota'
                             },
@@ -184,8 +176,8 @@
                                 name: 'nama'
                             },
                             {
-                                data: 'tanggal_masuk',
-                                name: 'tanggal_masuk'
+                                data: 'jenis_anggota',
+                                name: 'jenis_anggota'
                             },
                             {
                                 data: 'alamat',
@@ -198,43 +190,6 @@
                             {
                                 data: 'no_telp',
                                 name: 'no_telp'
-                            },
-                            {
-                                data: null,
-                                render: function(data) {
-                                    var simpananLink =
-                                        '<a href="{{ route('simpanan.create') }}" style="font-size: 10pt" class="btn btn-primary m-1 edit-btn" ' +
-                                        'data-id="' + data.id +
-                                        '">Simpanan</a>';
-
-                                    var pinjamanLink =
-                                        '<a href="{{ route('pinjaman.create') }}" style="font-size: 10pt" class="btn btn-info m-1 delete-btn" ' +
-                                        'data-id="' + data.id +
-                                        '">Pinjaman</a>';
-
-                                    if (data.has_simpanan) {
-                                        simpananLink = '<a href="{{ route('simpanan.show', '') }}/' +
-                                            data.id_anggota +
-                                            '" style="font-size: 10pt" class="btn btn-primary m-1 edit-btn" ' +
-                                            'data-id="' + data.id +
-                                            '">Simpanan</a>';
-
-                                    }
-
-                                    if (data.has_pinjaman) {
-                                        pinjamanLink = '<a href="{{ route('pinjaman.show', '') }}/' +
-                                            data.id_anggota +
-                                            '" style="font-size: 10pt" class="btn btn-info m-1 delete-btn" ' +
-                                            'data-id="' + data.id +
-                                            '">Pinjaman</a>';
-
-                                    }
-
-                                    return '<div class="row justify-content-center">' +
-                                        '<div class="col-auto">' + simpananLink + '</div>' +
-                                        '<div class="col-auto">' + pinjamanLink + '</div>' +
-                                        '</div>';
-                                }
                             },
                             {
                                 data: null,
@@ -255,6 +210,9 @@
                                         '</div>';
                                 }
                             }
+                        ],
+                        order: [
+                            [0, 'desc']
                         ],
                         rowCallback: function(row, data, index) {
                             var dt = this.api();
@@ -290,10 +248,10 @@
                                 data: 'DT_RowIndex',
                                 name: 'DT_RowIndex'
                             },
-                            {
-                                data: 'nik',
-                                name: 'nik'
-                            },
+                            // {
+                            //     data: 'nik',
+                            //     name: 'nik'
+                            // },
                             {
                                 data: 'no_anggota',
                                 name: 'no_anggota'
@@ -301,6 +259,10 @@
                             {
                                 data: 'nama',
                                 name: 'nama'
+                            },
+                            {
+                                data: 'jenis_anggota',
+                                name: 'jenis_anggota'
                             },
                             {
                                 data: 'tanggal_masuk',
@@ -321,6 +283,16 @@
                             {
                                 data: null,
                                 render: function(data) {
+                                    // var simpananLink =
+                                    //     '<a href="{{ route('pegawai.simpanan.create') }}" style="font-size: 10pt" class="btn btn-primary m-1 edit-btn" ' +
+                                    //     'data-id="' + data.id +
+                                    //     '">Simpanan</a>';
+
+                                    // var pinjamanLink =
+                                    //     '<a href="{{ route('pegawai.pinjaman.create') }}" style="font-size: 10pt" class="btn btn-info m-1 delete-btn" ' +
+                                    //     'data-id="' + data.id +
+                                    //     '">Pinjaman</a>';
+
                                     var simpananLink =
                                         '<a href="{{ route('pegawai.simpanan.create') }}" style="font-size: 10pt" class="btn btn-primary m-1 edit-btn" ' +
                                         'data-id="' + data.id +
@@ -364,13 +336,16 @@
                                         '<div class="col-auto">' +
                                         '<a href="{{ route('pegawai.anggota.edit', '') }}/' + data
                                         .id_anggota +
-                                        '" style="font-size: 10pt" class="btn btn-warning m-1 edit-btn" ' +
+                                        '" style="font-size: 10pt" class="btn btn-secondary m-1 edit-btn" ' +
                                         'data-id="' + data.id +
                                         '">Lihat</a>' +
                                         '</div>' +
                                         '</div>';
                                 }
                             }
+                        ],
+                        order: [
+                            [0, 'desc']
                         ],
                         rowCallback: function(row, data, index) {
                             var dt = this.api();

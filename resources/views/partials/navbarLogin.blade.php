@@ -9,7 +9,7 @@
                         PDAM Surya Sembada
                     </a> --}}
                     <img src="/icon/logobaru.png" class="navbar-brand-img  ms-lg-0 ms-3 "
-                        style="max-height: 35px; max-width:auto">
+                        style="max-height: 50px; max-width:auto">
                     {{-- <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
                         aria-label="Toggle navigation">

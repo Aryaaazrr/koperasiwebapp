@@ -38,8 +38,10 @@
                                 <th class="text-center">Tanggal</th>
                                 <th class="text-center">Keterangan</th>
                                 <th class="text-center">Klasifikasi</th>
-                                <th class="text-center">Jumlah Uang</th>
+                                <th class="text-center">Nominal</th>
+                                @if (Auth::user()->id_role == 2)
                                 <th class="text-center">Aksi</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody class="text-center" style="font-size: 10pt">
@@ -59,7 +61,7 @@
                         @endif
                         @csrf
                         <div class="modal-header">
-                            <h5 class="modal-title">Sisa Hasil Usaha</h5>
+                            <h5 class="modal-title">Tambah Beban Operasional</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body text-start">
@@ -74,10 +76,10 @@
                                     </div>
                                 </div> --}}
                             <div class="mb-3 row">
-                                <label for="jumlah_uang" class="col-sm-4 col-form-label">Jumlah Uang</label>
+                                <label for="jumlah_uang" class="col-sm-4 col-form-label">Nominal</label>
                                 <div class="col-sm-12">
                                     <input type="text" class="form-control" id="jumlah_uang" name="jumlah_uang"
-                                        placeholder="Masukkan Jumlah Uang" value="" required>
+                                        placeholder="Masukkan Nominal" value="" required>
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -145,10 +147,10 @@
                         <div class="modal-body text-start">
                             <input type="hidden" class="form-control" id="id_laporan" name="id_laporan" required>
                             <div class="mb-3 row">
-                                <label for="jumlah_uang" class="col-sm-4 col-form-label">Jumlah Uang</label>
+                                <label for="jumlah_uang" class="col-sm-4 col-form-label">Nominal</label>
                                 <div class="col-sm-12">
                                     <input type="text" class="form-control" id="jumlah_uang" name="jumlah_uang"
-                                        placeholder="Masukkan Jumlah Uang" required>
+                                        placeholder="Masukkan Nominal" required>
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -162,8 +164,8 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             @if (Auth::user()->id_role == 2)
-                                <button type="submit" class="btn btn-success">Simpan</button>
-                            @endif
+                            <button type="submit" class="btn btn-success">Simpan</button>
+                        @endif
                         </div>
                         </form>
                     </div>
@@ -247,6 +249,9 @@
                                 }
                             },
                         ],
+                        order : [
+                            [0, 'desc']
+                        ],
                         rowCallback: function(row, data, index) {
                             var dt = this.api();
                             $(row).attr('data-id', data.id);
@@ -315,21 +320,24 @@
                                     });
                                 }
                             },
-                            {
-                                data: null,
-                                render: function(data) {
-                                    var roundValueJumlahUang = data.jumlah_uang != null ? Math.round(
-                                        data.jumlah_uang) : 0;
+                            // {
+                            //     data: null,
+                            //     render: function(data) {
+                            //         var roundValueJumlahUang = data.jumlah_uang != null ? Math.round(
+                            //             data.jumlah_uang) : 0;
 
-                                    return '<div class="row justify-content-center">' +
-                                        '<div class="col-auto">' +
-                                        '<button type="button" class="btn btn-warning mt-3 edit-btn" data-bs-toggle="modal" style="font-size: 10pt" data-bs-target="#editModal" data-id="' +
-                                        data.id + '" data-keterangan="' + data.keterangan +
-                                        '" data-jumlah="' + roundValueJumlahUang + '">Lihat</button>' +
-                                        '</div>' +
-                                        '</div>';
-                                }
-                            },
+                            //         return '<div class="row justify-content-center">' +
+                            //             '<div class="col-auto">' +
+                            //             '<button type="button" class="btn btn-warning mt-3 edit-btn" data-bs-toggle="modal" style="font-size: 10pt" data-bs-target="#editModal" data-id="' +
+                            //             data.id + '" data-keterangan="' + data.keterangan +
+                            //             '" data-jumlah="' + roundValueJumlahUang + '">Edit</button>' +
+                            //             '</div>' +
+                            //             '</div>';
+                            //     }
+                            // },
+                        ],
+                        order : [
+                            [0, 'desc']
                         ],
                         rowCallback: function(row, data, index) {
                             var dt = this.api();

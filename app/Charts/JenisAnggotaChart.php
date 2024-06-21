@@ -20,21 +20,22 @@ class JenisAnggotaChart
         $tahun = $tahun ?: date('Y');
 
         $data = Anggota::select('jenis_anggota', DB::raw('count(*) as total'))
-            ->whereYear('tanggal_masuk', $tahun)
+            ->whereYear('created_at', $tahun)
             ->groupBy('jenis_anggota')
             ->pluck('total', 'jenis_anggota')->toArray();
 
         $anggotaPendiri = Anggota::where('jenis_anggota', 'Pendiri')
-            ->whereYear('tanggal_masuk', $tahun)
+            ->whereYear('created_at', $tahun)
             ->count();
         $anggotaBiasa = Anggota::where('jenis_anggota', 'Biasa')
-            ->whereYear('tanggal_masuk', $tahun)
+            ->whereYear('created_at', $tahun)
             ->count();
 
         $this->chart->setTitle('Distribusi Jenis Anggota')
             ->setSubtitle('Total Anggota Pendiri = ' . $anggotaPendiri . ', ' . 'Total Anggota Biasa = ' . $anggotaBiasa)
-            ->addData(array_values($data))
-            ->setLabels(array_keys($data));
+            ->addData([$anggotaPendiri, $anggotaBiasa])
+            ->setLabels(['Anggota Pendiri', 'Anggota Biasa'])
+            ->setColors(['#36A2EB', '#FF6384']);
 
         return $this->chart;
     }

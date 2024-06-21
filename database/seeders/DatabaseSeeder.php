@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         $data = [
-            'Admin', 'Kepala Koperasi', 'Pegawai'
+            'Admin', 'Pengurus', 'Pegawai'
         ];
 
         foreach ($data as $value) {

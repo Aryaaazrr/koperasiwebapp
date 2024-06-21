@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Pinjaman')
-@section('subtitle', 'Detail Pinjaman')
+@section('subtitle', 'Tambah Pinjaman')
 
 @section('content')
     <main class="container">
@@ -20,7 +20,6 @@
                             <th class="text-center">NIK</th>
                             <th class="text-center">No. Anggota</th>
                             <th class="text-center">Nama</th>
-                            <th class="text-center">Tanggal Masuk</th>
                             <th class="text-center">Alamat</th>
                             <th class="text-center">Pekerjaan</th>
                             <th class="text-center">No. Handphone</th>
@@ -80,10 +79,6 @@
                             name: 'nama'
                         },
                         {
-                            data: 'tanggal_masuk',
-                            name: 'tanggal_masuk'
-                        },
-                        {
                             data: 'alamat',
                             name: 'alamat'
                         },
@@ -118,7 +113,7 @@
                                     data.id_anggota + '" required>' +
                                     '<div class="mb-3 row">' +
                                     '<label for="angsuran' + data.id_anggota +
-                                    '" class="col-sm-2 col-form-label">Angsuran Pinjaman</label>' +
+                                    '" class="col-sm-2 col-form-label">Lama Angsuran/bulan</label>' +
                                     '<div class="col-sm-12">' +
                                     '<input type="number" class="form-control" id="angsuran' + data
                                     .id_anggota +
@@ -127,7 +122,7 @@
                                     '</div>' +
                                     '<div class="mb-3 row">' +
                                     '<label for="nominal_pinjaman' + data.id_anggota +
-                                    '" class="col-sm-2 col-form-label">Nominal</label>' +
+                                    '" class="col-sm-2 col-form-label">Pinjaman</label>' +
                                     '<div class="col-sm-12">' +
                                     '<input type="text" class="form-control" id="nominal_pinjaman' +
                                     data.id_anggota +
@@ -236,13 +231,13 @@
                                     '</div>' +
                                     '<div class="modal-body text-start">' +
                                     '<form id="formPinjaman' + data.id_anggota +
-                                    '" action="{{ route('pegawai.pinjaman.store') }}" method="POST" enctype="multipart/form-data">' +
+                                    '" action="{{ route('pinjaman.store') }}" method="POST" enctype="multipart/form-data">' +
                                     '@csrf' +
                                     '<input type="hidden" class="form-control" id="id_anggota" name="id_anggota" value="' +
                                     data.id_anggota + '" required>' +
                                     '<div class="mb-3 row">' +
                                     '<label for="angsuran' + data.id_anggota +
-                                    '" class="col-sm-2 col-form-label">Angusan Pinjaman</label>' +
+                                    '" class="col-sm-2 col-form-label">Lama Angsuran/bulan</label>' +
                                     '<div class="col-sm-12">' +
                                     '<input type="number" class="form-control" id="angsuran' + data
                                     .id_anggota +
@@ -251,11 +246,20 @@
                                     '</div>' +
                                     '<div class="mb-3 row">' +
                                     '<label for="nominal_pinjaman' + data.id_anggota +
-                                    '" class="col-sm-2 col-form-label">Nominal</label>' +
+                                    '" class="col-sm-2 col-form-label">Pinjaman</label>' +
                                     '<div class="col-sm-12">' +
                                     '<input type="text" class="form-control" id="nominal_pinjaman' +
                                     data.id_anggota +
                                     '" name="nominal_pinjaman" placeholder="Masukkan Nominal" required>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '<div class="mb-3 row">' +
+                                    '<label for="bunga' + data.id_anggota +
+                                    '" class="col-sm-2 col-form-label">Bunga Pinjaman</label>' +
+                                    '<div class="col-sm-12">' +
+                                    '<input type="number" class="form-control" id="bunga' +
+                                    data.id_anggota +
+                                    '" name="bunga_pinjaman" max="100" min="1" placeholder="Masukkan Bunga Pinjaman" required>' +
                                     '</div>' +
                                     '</div>' +
                                     '</form>' +

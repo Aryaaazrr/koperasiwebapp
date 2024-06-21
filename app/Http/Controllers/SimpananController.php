@@ -488,8 +488,8 @@ class SimpananController extends Controller
 
             if ($simpanan_pokok > 0) {
                 return back()->with('error', 'Simpanan Pokok tidak dapat dihapus.');
-            } elseif ($simpanan_wajib > 0) {
-                return back()->with('error', 'Simpanan Wajib tidak dapat dihapus.');
+            // } elseif ($simpanan_wajib > 0) {
+            //     return back()->with('error', 'Simpanan Wajib tidak dapat dihapus.');
             } else {
                 $simpanan = Simpanan::where('id_simpanan', $detail->id_simpanan)->first();
                 $saldoSebelum = 0.00;

@@ -71,12 +71,6 @@
             </div>
 
             <div class="col-md-6 mb-3">
-                <label for="tanggal_masuk" class="col-md-6 col-form-label">Tanggal Masuk</label>
-                <input type="date" class="form-control" name='tanggalmasuk' id="tanggal_masuk"
-                    value="{{ old('tanggalmasuk') }}" required>
-            </div>
-
-            <div class="col-md-6 mb-3">
                 <label for="jenisanggota" class="col-md-6 col-form-label">Jenis Anggota</label>
                 <select class="form-select cursor-pointer" aria-label="Default select example" id="jenisanggota"
                     name="jenisanggota" value="{{ old('jenisanggota') }}" required>

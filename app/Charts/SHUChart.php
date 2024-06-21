@@ -26,7 +26,7 @@ class SHUChart
         $sisa_hasil_usaha = [];
 
         for ($i = 1; $i <= 12; $i++) {
-            if ($tahun == date('Y') && $i > $bulan) {
+             if ($tahun == date('Y') && $i > $bulan) {
                 break;
             }
 

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('icon/logobaru.png') }}">
-    <link rel="icon" type="image/png" href="{{ asset('icon/logobaru.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('icon/logo.png') }}">
     <title>
         @yield('title') | Koperasi Simpan Pinjam Bangun Karya Desa
     </title>

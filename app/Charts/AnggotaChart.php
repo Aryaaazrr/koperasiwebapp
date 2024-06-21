@@ -24,8 +24,8 @@ class AnggotaChart
         $dataBulan = [];
 
         for ($i = 1; $i <= $bulan; $i++) {
-            $jumlahAnggota = Anggota::whereYear('tanggal_masuk', $tahun)
-                ->whereMonth('tanggal_masuk', $i)
+            $jumlahAnggota = Anggota::whereYear('created_at', $tahun)
+                ->whereMonth('created_at', $i)
                 ->count();
 
             $dataBulan[] = Carbon::create()->month($i)->format('F');

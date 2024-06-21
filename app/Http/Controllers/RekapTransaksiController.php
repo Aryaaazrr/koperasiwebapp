@@ -31,7 +31,7 @@ class RekapTransaksiController extends Controller
             $startDate = Carbon::parse($request->input('start_date'))->startOfDay();
             $endDate = Carbon::parse($request->input('end_date'))->endOfDay();
             $query->whereBetween('created_at', [$startDate, $endDate]);
-        }
+        } 
 
         $rekap = $query->get();
 

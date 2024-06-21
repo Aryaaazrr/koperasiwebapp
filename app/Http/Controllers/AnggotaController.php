@@ -19,18 +19,12 @@ class AnggotaController extends Controller
 
     public function index(Request $request)
     {
-        $users = Anggota::with('simpanan', 'pinjaman')->get();
+        $users = Anggota::orderBy('created_at', 'desc')->get();
 
         if ($request->ajax()) {
             return DataTables::of($users)
                 ->addColumn('DT_RowIndex', function ($user) {
                     return $user->id_anggota;
-                })
-                ->addColumn('has_simpanan', function ($user) {
-                    return !empty($user->simpanan);
-                })
-                ->addColumn('has_pinjaman', function ($user) {
-                    return !empty($user->pinjaman) && count($user->pinjaman) > 0;
                 })
                 ->toJson();
         }
@@ -55,7 +49,6 @@ class AnggotaController extends Controller
             'alamat' => 'required',
             'noTelp' => 'required|numeric',
             'pekerjaan' => 'required',
-            'tanggalmasuk' => 'required',
             'jenisanggota' => 'required|in:Pendiri,Biasa',
         ]);
 
@@ -73,7 +66,6 @@ class AnggotaController extends Controller
         $anggota->alamat = $request->alamat;
         $anggota->no_telp = $request->noTelp;
         $anggota->pekerjaan = $request->pekerjaan;
-        $anggota->tanggal_masuk = $request->tanggalmasuk;
         $anggota->jenis_anggota = $request->jenisanggota;
 
         if ($anggota->save()) {
@@ -116,7 +108,6 @@ class AnggotaController extends Controller
             'alamat' => 'required',
             'noTelp' => 'required|numeric',
             'pekerjaan' => 'required',
-            'tanggalmasuk' => 'required',
         ]);
 
 
@@ -132,7 +123,6 @@ class AnggotaController extends Controller
         $anggota->alamat = $request->alamat;
         $anggota->no_telp = $request->noTelp;
         $anggota->pekerjaan = $request->pekerjaan;
-        $anggota->tanggal_masuk = $request->tanggalmasuk;
 
         if ($anggota->save()) {
             if (Auth::user()->id_role == 1) {

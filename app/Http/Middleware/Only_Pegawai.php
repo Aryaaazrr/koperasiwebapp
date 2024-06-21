@@ -20,7 +20,7 @@ class Only_Pegawai
             if (Auth::user()->id_role == '1') {
                 return redirect('admin/dashboard');
             } else {
-                return redirect('kepala/dashboard');                
+                return redirect('pengurus/dashboard');                
             }
         }
         return $next($request);

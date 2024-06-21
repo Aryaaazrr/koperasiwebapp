@@ -11,10 +11,10 @@ class DetailSimpanan extends Model
     protected $table = 'detail_simpanan';
     protected $primaryKey = 'id';
     protected $guarded = [];
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
+    // protected $dates = [
+    //     'created_at' => 'datetime',
+    //     'updated_at' => 'datetime',
+    // ];
 
     public function simpanan()
     {

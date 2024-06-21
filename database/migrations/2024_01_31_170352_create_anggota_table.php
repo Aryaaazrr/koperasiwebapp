@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->string('no_telp')->nullable();
             $table->string('pekerjaan')->nullable();
-            $table->string('tanggal_masuk')->nullable();
             $table->enum('jenis_anggota', ['Pendiri', 'Biasa'])->nullable();
             $table->timestamps();
         });
