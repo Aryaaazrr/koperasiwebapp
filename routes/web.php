@@ -136,6 +136,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('simpanan/export/pdf/{id}', [SimpananController::class, 'export'])->name('pegawai.simpanan.export');
 
         Route::get('pinjaman', [PinjamanController::class, 'index'])->name('pegawai.pinjaman');
+        Route::get('pinjaman/belum-lunas', [PinjamanController::class, 'belumLunas'])->name('pegawai.pinjaman.belum.lunas');
+        Route::get('pinjaman/lunas', [PinjamanController::class, 'lunas'])->name('pegawai.pinjaman.lunas');
         Route::get('pinjaman/add', [PinjamanController::class, 'create'])->name('pegawai.pinjaman.create');
         Route::post('pinjaman/add', [PinjamanController::class, 'store'])->name('pegawai.pinjaman.store');
         Route::get('pinjaman/view/{id}', [PinjamanController::class, 'show'])->name('pegawai.pinjaman.show');
